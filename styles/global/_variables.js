@@ -1,4 +1,7 @@
 module.exports = {
+
+    /*theme*/
+    blue: "#009bde",
     
     /* break-points */
     sm: 'min-width: 576px',

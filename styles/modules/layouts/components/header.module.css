@@ -4,3 +4,17 @@
     z-index: 99999;
     height: 150px;
 }
+
+.headerTopInfo{
+    color: #fff;
+    text-decoration: none;
+
+    div{
+        position: relative;
+        margin-right: 40px;
+
+        &:last-child{
+            margin-right: 0;
+        }
+    }
+}
