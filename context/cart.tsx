@@ -69,6 +69,8 @@ export default function Cart ({ children} : childrenType){
 
 	useEffect(() => {
 		setState((prev) => {
+            if (prev.addItem) return prev;
+            
 			return {
 				contents: [...prev.contents],
                 cartTotal: prev.cartTotal,
