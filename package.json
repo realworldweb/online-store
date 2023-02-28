@@ -14,6 +14,7 @@
     "@types/react-dom": "18.0.11",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.1",
+    "html-react-parser": "^3.0.9",
     "next": "13.2.1",
     "postcss": "^8.4.21",
     "postcss-custom-media": "^9.1.2",
