@@ -27,12 +27,13 @@ function Header() {
 				<div className='container-fluid  p-lr-80'>
 					<div className='row g-0'>
 						<div className='col-lg-12'>
-
 							{/*Start Header Top Info*/}
 							<div
 								className={`position-relative d-flex flex-column align-items-center mt-1  ${Styles.headerTopInfo}`}
 							>
-								<div className={`d-flex position-relative w-100 flex-column align-items-center justify-content-center flex-md-row ${Styles.headerContact}`}>
+								<div
+									className={`d-flex position-relative w-100 flex-column align-items-center justify-content-center flex-md-row ${Styles.headerContact}`}
+								>
 									<div className={Styles.headerPhone}>
 										<SvgTelephone width='1rem' height='1rem' />
 										&nbsp; Call Us : <span>+0123456789</span>
@@ -50,9 +51,22 @@ function Header() {
 									</div>
 								</div>
 								<Cart />
-							</div>{' '}
+								<div className='d-flex position-relative w-100 d-block'>
+									<div className='d-flex w-100 position-relative  mx-auto justify-content-between align-items-center'>
+										<Link
+											href='/'
+											className={`d-flex justify-content-center fw-bold text-decoration-none ${Styles.headerLogo}`}
+										>
+											<em>Pretium</em>
+										</Link>
+										<nav className={`d-flex justify-content-between text-white position-relative ${Styles.headerNav}`}>
+											<Link href='/'>Home</Link>
+											<Link href='/products'>Products</Link>
+										</nav>
+									</div>
+								</div>{' '}
+							</div>
 							{/*End Header Top Info*/}
-                            
 						</div>
 					</div>
 				</div>
@@ -60,22 +74,8 @@ function Header() {
 			{/*End Header Top*/}
 
 			{/*Start Header Sticky*/}
-			<div className='header-sticky-area home--3 d-none d-lg-block'>
-				<div className='container-fluid p-lr-80'>
-					<div className='row align-items-center'>
-						<div className='col-lg-9 d-lg-block d-none '>
-							<nav className='header-menu text-dark position-relative'>
-								<Link href='#'>Home</Link>
-								<Link href='#'>Shop</Link>
-								<Link href='#'>About</Link>
-								<Link href='#'>Contact Us</Link>
-							</nav>
-						</div>
-					</div>
-				</div>
-			</div>{' '}
+
 			{/*End Header Sticky*/}
-			
 		</>
 	);
 }

@@ -13,6 +13,7 @@ const getProducts = async (amount = 8) => {
             products(channel: "uk", first: ${amount}) {
                   edges {
                     node {
+                      id
                       thumbnail(size: 200) {
                         url
                         alt

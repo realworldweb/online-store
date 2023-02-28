@@ -19,6 +19,16 @@
     }
 }
 
-.headerContact{
-    left: -5%;
+.headerLogo{
+    font-size: 2.3rem;
+    color: #fff;
+}
+
+.headerNav{
+    gap: 20px;
+    a{
+        color: #fff;
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
 }
