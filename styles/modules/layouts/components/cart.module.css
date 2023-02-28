@@ -1,3 +1,6 @@
+.cart{
+    transform: translateX(-6%);
+}
 
 .cartButton{
     background-color: $blue;

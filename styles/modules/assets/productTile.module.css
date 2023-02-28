@@ -1,0 +1,11 @@
+.productTile{
+    width: 35vw;
+    max-width: 310px;
+    border: 2px solid rgba(105,105,105,0.4);
+    boxshadow: 0 3px 4px rgba(105,105,105,0.7);
+    border-radius: 20px;
+}
+
+.productTileControls{
+  gap: 30px;
+}

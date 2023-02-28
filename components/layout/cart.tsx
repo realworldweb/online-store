@@ -1,3 +1,5 @@
+/*react*/
+import { useState } from 'react';
 
 /*context*/
 import { useCart } from '@/context/cart';
@@ -11,16 +13,18 @@ import { SvgBag } from '../../components/assets/svgs'
 const cart = () => {
 
     const { contents, cartTotal, removeItem, addItem, clearAll, checkout } = useCart();
+    const [detailsVisible, setDetailsVisible] = useState(false);
+
 
   return (
-    <div className={`d-flex w-100 flex-column position-relative mx-auto align-items-center ${Styles.cart}`}>
-    <button type="button" className={`d-flex align-items-center py-3 px-5 ${Styles.cartButton}`}>
+    <div className={`d-flex w-100 flex-column position-relative align-items-center ${Styles.cart}`}>
+    <button type="button" onClick={() => setDetailsVisible(!detailsVisible)} className={`d-flex align-items-center py-3 px-5 ${Styles.cartButton}`}>
         <SvgBag width="1.5rem" height="1.5rem" />&nbsp;
         <span className={Styles.cartTotal}>{contents.length}&nbsp; Items</span>&nbsp;: &pound; {cartTotal}
 
     </button>
 
-    <div className={Styles.cartDeatils}>
+    <div className={`${Styles.cartDeatils} ${detailsVisible? "" : "d-none"}`}>
         {contents.map((item: any, index: number) => {
             return (
                 <div key={index} className={Styles.cartItem}>
@@ -29,7 +33,7 @@ const cart = () => {
                     </div>
                     <div className={Styles.cartItemDetails}>
                         <div className={Styles.cartItemName}>{item.name}</div>
-                        <div className={Styles.cartItemPrice}>& {item.price}</div>
+                        <div className={Styles.cartItemPrice}>&pound; {item.price}</div>
                         <div className={Styles.cartItemRemove}>
                             <button type="button" className={`btn btn-outline-danger ${Styles.cartItemRemoveButton}`} onClick={() => removeItem(index)}>Remove</button>
                         </div>

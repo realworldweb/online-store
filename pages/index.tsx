@@ -1,9 +1,6 @@
 /*react*/
 import { ReactElement, useState, useEffect} from 'react';
 
-/*modeules*/
-import parse from 'html-react-parser';
-
 /*next*/
 import Head from 'next/head';
 import type { NextPageWithLayout } from './_app';
@@ -14,6 +11,7 @@ import Layout from '../layouts/main'
 /*data*/
 import { getProducts } from '@/lib/products';
 import { removeProductNotes } from '@/lib/helpers';
+import ProductTile from '@/components/assets/productTile';
 
 /*types*/
 interface myProps {
@@ -40,11 +38,6 @@ export async function getServerSideProps() {
 }
 
 const  Home: NextPageWithLayout<myProps> = ({data}) => {
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    setLoaded(true);
-  }, []);
 
   return (
     <>
@@ -53,16 +46,12 @@ const  Home: NextPageWithLayout<myProps> = ({data}) => {
         <meta name="description" content="online store for comestics and pampering products for him and her" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main>
+      <main className='d-flex position-relative flex-wrap px-4'>
       {
         data.map((product,index) => {
         
           return (
-            <div key={index}>
-              <h1>{product.name}</h1>
-              {loaded ? <div>{parse(product.description)}</div> : null}
-              <p>{product.pricing.priceRangeUndiscounted.stop.gross.amount}</p>
-            </div>
+           <ProductTile product={product} key={index} />
           )
         })
       }

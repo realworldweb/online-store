@@ -27,11 +27,12 @@ function Header() {
 				<div className='container-fluid  p-lr-80'>
 					<div className='row g-0'>
 						<div className='col-lg-12'>
+
 							{/*Start Header Top Info*/}
 							<div
 								className={`position-relative d-flex flex-column align-items-center mt-1  ${Styles.headerTopInfo}`}
 							>
-								<div className={`d-flex flex-column flex-md-row`}>
+								<div className={`d-flex position-relative w-100 flex-column align-items-center justify-content-center flex-md-row ${Styles.headerContact}`}>
 									<div className={Styles.headerPhone}>
 										<SvgTelephone width='1rem' height='1rem' />
 										&nbsp; Call Us : <span>+0123456789</span>
@@ -51,45 +52,19 @@ function Header() {
 								<Cart />
 							</div>{' '}
 							{/*End Header Top Info*/}
+                            
 						</div>
 					</div>
 				</div>
-			</div>{' '}
-			{/*Start Header Top*/}
+			</div>
+			{/*End Header Top*/}
+
 			{/*Start Header Sticky*/}
 			<div className='header-sticky-area home--3 d-none d-lg-block'>
 				<div className='container-fluid p-lr-80'>
 					<div className='row align-items-center'>
-						{/*Start Header Logo*/}
-						<div className='col-lg-2'>
-							<div className='row'>
-								<div className='col-md-12 col-xl-12 align-self-center'>
-									<div className='top-absolute-sticky-logo d-none'>
-										<a href='index.html' aria-label='search'>
-											<img
-												width='128'
-												height='33'
-												src='assets/img/logo_footer.webp'
-												alt=''
-											/>
-										</a>
-									</div>
-									<div className='header-logo text-center header-logo__color--home-4'>
-										<a href='index.html' aria-label='home'>
-											<img
-												width='128'
-												height='33'
-												src='assets/img/logo_footer.webp'
-												alt=''
-											/>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>{' '}
-						{/*End Header Logo*/}
 						<div className='col-lg-9 d-lg-block d-none '>
-							<nav className='header-menu position-relative'>
+							<nav className='header-menu text-dark position-relative'>
 								<Link href='#'>Home</Link>
 								<Link href='#'>Shop</Link>
 								<Link href='#'>About</Link>
@@ -100,42 +75,7 @@ function Header() {
 				</div>
 			</div>{' '}
 			{/*End Header Sticky*/}
-			{/*Start Header Sticky*/}
-			<div className='header-mobile-area  home--4 d-block d-lg-none m-b-20'>
-				<div className='container-fluid p-lr-80'>
-					<div className='row align-items-center'>
-						{/*Start Header Logo*/}
-						<div className='col-12'>
-							<div className='row'>
-								<div className='col-md-12 col-xl-12 align-self-center'>
-									<div className='top-absolute-sticky-logo'>
-										<a href='index.html' aria-label='logo'>
-											<img
-												width='128'
-												height='33'
-												src='assets/img/logo_footer.webp'
-												alt=''
-											/>
-										</a>
-									</div>
-									<div className='header-logo header-logo__color header-logo__color--home-4'>
-										<a href='index.html' aria-label='logo'>
-											<img
-												width='128'
-												height='33'
-												src='assets/img/logo_footer.webp'
-												alt=''
-											/>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>{' '}
-						{/*End Header Logo*/}
-					</div>
-				</div>
-			</div>{' '}
-			{/*End Header Sticky*/}
+			
 		</>
 	);
 }

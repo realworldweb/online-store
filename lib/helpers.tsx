@@ -11,7 +11,8 @@ return [...str].reduce((acc: string[], val: string) => {
         acc.push(val)
     
 return acc;
-},[])
+},[]).join('');
+
 }
 
 export{

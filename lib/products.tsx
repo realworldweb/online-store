@@ -39,7 +39,7 @@ const getProducts = async (amount = 8) => {
     const data = await response.json();
     const projects = data.data.products.edges;
 
-    return projects.map((product: any) => { return {...product.node, description: JSON.parse(product.node.description), cursor : product.cursor}})
+    return projects.map((product: any) => { return {...product.node, description: JSON.parse(product.node.description), price: product.node.pricing.priceRangeUndiscounted.stop.gross.amount, cursor : product.cursor}})
 ;
 
 }

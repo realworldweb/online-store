@@ -1,14 +1,10 @@
 import { useEffect, useState, createContext, useContext, ReactElement } from 'react';
 
 interface item {
-	id: number,
-	title: string,
-	description: string,
-	price: number,
-	image: string,
-	category: string,
-	rating: number,
-	countInStock: number,
+	id: string;
+	name: string;
+    price: number;
+	qty: number;
 };
 
 interface cartType {
