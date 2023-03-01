@@ -14,8 +14,10 @@ import { removeProductNotes } from '@/lib/helpers';
 import ProductTile from '@/components/assets/productTile';
 
 /*types*/
+
+import { Item } from '@/lib/types';
 interface myProps {
-  data: any[];
+  data: Item[];
 }
 
 export async function getServerSideProps() {
@@ -28,7 +30,6 @@ export async function getServerSideProps() {
   let data = await getProducts();
   data = data.map((product: any) => {
     product.name = removeProductNotes(product.name);
-    product.description = `<p>${product.description.blocks[0].data.text}</p>`;
 
     return product
   })

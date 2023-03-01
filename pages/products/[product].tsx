@@ -42,14 +42,15 @@ export async function getServerSideProps(context: any) {
 }
 
 const Home: NextPageWithLayout<myProps> = ({ data }) => {
-    /*
+	/*
     loaded: indicates whether the page has been mounted for clientside hydration
     */
-	const [loaded, setLoaded] = useState(false); 
+	const [loaded, setLoaded] = useState(false);
 
-    
+	const [qty, setQty] = useState(1);
+
 	useEffect(() => {
-        //client has mounted for hydration
+		//client has mounted for hydration
 
 		setLoaded(true);
 	}, []);
@@ -66,18 +67,36 @@ const Home: NextPageWithLayout<myProps> = ({ data }) => {
 			</Head>
 			<main className='d-flex position-relative flex-wrap py-3 px-4'>
 				<div className='d-flex flex-column'>
-                    <div className=''>
-                        <img
-    						width='400'
-    						height='200'
-    						src={data.thumbnail.url ? data.thumbnail.url : "/no-image.png" }
-    						alt={data.thumbnail?.alt ? data.thumbnail.alt : "presentation"}
-    
-    					/>
-                    </div ></div>
+					<div className=''>
+						<img
+							width='400'
+							height='200'
+							src={data.thumbnail.url ? data.thumbnail.url : '/no-image.png'}
+							alt={data.thumbnail.alt ? data.thumbnail.alt : 'presentation'}
+						/>
+					</div>
+				</div>
 				<div className='d-flex align-items-center w-50 flex-column'>
 					<h1>{data.name.trim()}</h1>
-					{loaded ? parse(`<div>${data.description.blocks[0].data.text}</div>`) : null}
+					{loaded
+						? parse(`<div>${data.description.blocks[0].data.text}</div>`)
+						: null}
+					<div className='d-flex w-50 mt-3 align-items-center justify-content-between'>
+						<p className='m-0'>&pound;{data.price}.00</p>
+						<div className='d-flex align-items-center'>
+							<label htmlFor='qty'>Qty:</label>
+							&nbsp;
+							<input
+								value={qty}
+								className='d-flex position-relative text-center'
+								type='number'
+								name='qty'
+								min='1'
+								max='100'
+								step='1'
+							/>
+						</div>
+					</div>
 				</div>
 			</main>
 		</>

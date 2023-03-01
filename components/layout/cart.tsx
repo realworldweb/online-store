@@ -10,7 +10,7 @@ import Styles from '../../styles/modules/layouts/components/cart.module.css';
 /*assets*/
 import { SvgBag } from '../../components/assets/svgs'
 
-const cart = () => {
+const Cart = () => {
 
     const { contents, cartTotal, removeItem, addItem, clearAll, checkout } = useCart();
     const [detailsVisible, setDetailsVisible] = useState(false);
@@ -52,4 +52,4 @@ const cart = () => {
   )
 }
 
-export default cart
+export default Cart
