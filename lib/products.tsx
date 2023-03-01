@@ -14,7 +14,7 @@ const getProducts = async (amount = 8) => {
                   edges {
                     node {
                       id
-                      thumbnail(size: 200) {
+                      thumbnail(size: 400) {
                         url
                         alt
                       }
@@ -29,7 +29,6 @@ const getProducts = async (amount = 8) => {
                         }
                       }
                       name
-                      description
                     }
                     cursor
                   }
@@ -38,9 +37,9 @@ const getProducts = async (amount = 8) => {
         }),
     })
     const data = await response.json();
-    const projects = data.data.products.edges;
+    const products = data.data.products.edges;
 
-    return projects.map((product: any) => { return {...product.node, description: JSON.parse(product.node.description), price: product.node.pricing.priceRangeUndiscounted.stop.gross.amount, cursor : product.cursor}})
+    return products.map((product: any) => { return {...product.node, description: JSON.parse(product.node.description), price: product.node.pricing.priceRangeUndiscounted.stop.gross.amount, cursor : product.cursor}})
 ;
 
 }
@@ -59,7 +58,6 @@ const getMoreProducts = async (after:string, amount = 8) => {
                 edges {
                   node {
                     id
-                    description
                     }
                   }
                   cursor
@@ -76,8 +74,46 @@ const getMoreProducts = async (after:string, amount = 8) => {
     return data.data;
 }
 
+const getProduct = async (id: string) => {
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        query:
+        `query GetProduct{
+          product( channel: "uk", id: "${id}") {
+
+            name
+            id
+            description
+            thumbnail(size: 200) {
+              url
+              alt
+            }
+            pricing {
+              priceRangeUndiscounted {
+                stop {
+                  gross {
+                    amount
+                  }
+                }
+              }
+            }
+          }
+          }`,
+    }),
+});
+const data = await response.json();
+const product = data.data.product;
+
+return {...product, description: JSON.parse(product.description), price: product.pricing.priceRangeUndiscounted.stop.gross.amount};
+}
+
 export{
     getProducts,
     getMoreProducts,
+    getProduct,
 
 }

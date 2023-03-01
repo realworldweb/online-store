@@ -1,58 +1,88 @@
 /*react*/
-import { ReactElement } from 'react';
+import { ReactElement, useState, useEffect } from 'react';
+
+/*react modules*/
+import parse from 'html-react-parser';
 
 /*next*/
 import Head from 'next/head';
 import type { NextPageWithLayout } from '.././_app';
 
 /*layout*/
-import Layout from '@/layouts/main'
+import Layout from '@/layouts/main';
 
 /*data*/
-import { getProducts } from '@/lib/products';
+import { getProduct } from '@/lib/products';
 import { removeProductNotes } from '@/lib/helpers';
 
-
 /*types*/
+
+import type { Item } from '@/lib/types';
+
 interface myProps {
-  data: any[];
+	data: Item;
 }
 
 export async function getServerSideProps(context: any) {
-  /*
-   calls the getProducts to Fetch data from external API
+	/*
+   calls the getProduct to Fetch data from external API
    args: {
-    amount: optional(default : 8 ) indicates how many products to fetch
+    product: indicates which product to fetch
+
    }
   */
- console.log(context);
-  let data = await getProducts();
-  data = data.map((product: any) => {
-    product.name = removeProductNotes(product.name);
-    product.description = `<p>${product.description.blocks[0].data.text}</p>`;
-     
-    return product
-  })
+	const { product } = context.params;
 
-  // Pass data to the page via props
-  return { props: { data } }
+	const data = await getProduct(product);
+
+	data.name = removeProductNotes(data.name);
+
+	// Pass data to the page via props
+	return { props: { data } };
 }
 
-const  Home: NextPageWithLayout<myProps> = ({data}) => {
+const Home: NextPageWithLayout<myProps> = ({ data }) => {
+    /*
+    loaded: indicates whether the page has been mounted for clientside hydration
+    */
+	const [loaded, setLoaded] = useState(false); 
 
-  return (
-    <>
-      <Head>
-        <title>Pretium - {data.productName}</title>
-        <meta name="description" content="online store for comestics and pampering products for him and her" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-      <main className='d-flex position-relative flex-wrap px-4'>
-      
-      </main>
-    </>
-  )
-}
+    
+	useEffect(() => {
+        //client has mounted for hydration
+
+		setLoaded(true);
+	}, []);
+
+	return (
+		<>
+			<Head>
+				<title>Pretium - ${data.name.trim()}</title>
+				<meta
+					name='description'
+					content='online store for comestics and pampering products for him and her'
+				/>
+				<meta name='viewport' content='width=device-width, initial-scale=1' />
+			</Head>
+			<main className='d-flex position-relative flex-wrap py-3 px-4'>
+				<div className='d-flex flex-column'>
+                    <div className=''>
+                        <img
+    						width='400'
+    						height='200'
+    						src={data.thumbnail.url ? data.thumbnail.url : "/no-image.png" }
+    						alt={data.thumbnail?.alt ? data.thumbnail.alt : "presentation"}
+    
+    					/>
+                    </div ></div>
+				<div className='d-flex align-items-center w-50 flex-column'>
+					<h1>{data.name.trim()}</h1>
+					{loaded ? parse(`<div>${data.description.blocks[0].data.text}</div>`) : null}
+				</div>
+			</main>
+		</>
+	);
+};
 
 Home.getLayout = function getLayout(page: ReactElement) {
 	return <Layout>{page}</Layout>;
