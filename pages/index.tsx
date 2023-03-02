@@ -47,7 +47,7 @@ const  Home: NextPageWithLayout<myProps> = ({data}) => {
         <meta name="description" content="online store for comestics and pampering products for him and her" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main className='d-flex position-relative flex-wrap px-4'>
+      <main className='d-flex flex-column flex-md-row position-relative flex-wrap px-4'>
       {
         data.map((product,index) => {
           return (

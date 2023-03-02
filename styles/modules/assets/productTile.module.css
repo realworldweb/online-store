@@ -1,9 +1,14 @@
 .productTile{
-    width: 35vw;
-    max-width: 310px;
+    width: 86vw;
+    max-width: 400px;
     border: 2px solid rgba(105,105,105,0.4);
     boxshadow: 0 3px 4px rgba(105,105,105,0.7);
     border-radius: 20px;
+
+    @media($md){
+      width: 35vw;
+      max-width: 330px;
+    }
 }
 
 .productTileControls{

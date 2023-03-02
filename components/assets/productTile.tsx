@@ -38,7 +38,7 @@ const ProductTile: FC<MyProps> = ({ product }) => {
 					/>
 				</div>
 			</Link>
-			<div>
+			<div className='position-relative w-100'>
 				<h4 className='d-flex w-100 text-center justify-content-center'>
 					<Link
 						href={`/products/${product.id}`}
@@ -66,7 +66,7 @@ const ProductTile: FC<MyProps> = ({ product }) => {
 					</button>
 					<Link
 						href={`/products/${product.id}`}
-						className={`btn mt-1 d-block w-75 position-relative text-dark mx-auto ${ButtonStyles.gradientButtonDanger}`}
+						className={`btn mt-1 w-75 d-block position-relative text-dark mx-auto ${ButtonStyles.gradientButtonDanger}`}
 						tabIndex={0}
 					>
 						More info
