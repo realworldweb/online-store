@@ -77,8 +77,8 @@ const Home: NextPageWithLayout<myProps> = ({ data }) => {
 						<img
 							width='400'
 							height='200'
-							src={data.thumbnail.url ? data.thumbnail.url : '/no-image.png'}
-							alt={data.thumbnail.alt ? data.thumbnail.alt : 'presentation'}
+							src={data.thumbnail?.url ? data.thumbnail?.url : '/no-image.png'}
+							alt={data.thumbnail?.alt ? data.thumbnail?.alt : 'presentation'}
 						/>
 					</div>
 				<div className={`mx-auto ${Styles.productInfo}`}>
@@ -86,7 +86,7 @@ const Home: NextPageWithLayout<myProps> = ({ data }) => {
 					{/*{mounted
 						? parse(`<div>${data.description.blocks[0].data.text}</div>`)
 					: null}*/}
-					<p className='mt-1 text-center mx-auto'>{data.seoDescription}</p>
+					<p className='mt-1 text-center px-2 mx-auto'>{data.seoDescription}</p>
 					<div className='d-flex w-75 mx-auto mt-3 align-items-center justify-content-between'>
 						<p className='my-0 py-0 fw-bold'><em>&pound;{parseFloat(String(data.price)).toFixed(2)}</em></p>
 							<div className={`d-flex justify-content-end`}>
@@ -103,7 +103,7 @@ const Home: NextPageWithLayout<myProps> = ({ data }) => {
 								/>
 							</div >
 					</div>
-					<button className={`btn mt-3 d-block position-relative text-dark mx-auto ${ButtonStyles.gradientButtonSuccess}`} onClick={() => addItem({name: data.name, price: data.price, qty: Number(qty)})}>
+					<button className={`btn mt-3 d-block position-relative text-dark mx-auto ${ButtonStyles.gradientButtonSuccess}`} onClick={() => addItem({id: data.id, name: data.name, price: data.price, qty: Number(qty)})}>
 						<p className='m-0 p-0'>Add to cart</p>
 					</button>
 				</div>

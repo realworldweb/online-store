@@ -12,7 +12,7 @@ import { SvgBag } from '../../components/assets/svgs'
 
 const Cart = () => {
 
-    const { contents, cartTotal, removeItem, addItem, clearAll, checkout } = useCart();
+    const { contents, cartTotal, itemCount, removeItem, addItem, clearAll, checkout } = useCart();
     const [detailsVisible, setDetailsVisible] = useState(false);
 
 
@@ -20,7 +20,7 @@ const Cart = () => {
     <div className={`d-flex w-100 flex-column position-relative align-items-center ${Styles.cart}`}>
     <button type="button" onClick={() => setDetailsVisible(!detailsVisible)} className={`d-flex align-items-center py-3 px-5 ${Styles.cartButton}`}>
         <SvgBag width="1.5rem" height="1.5rem" />&nbsp;
-        <span className={Styles.cartTotal}>{contents.length}&nbsp; Items</span>&nbsp;: &pound; {cartTotal}
+        <span className={Styles.cartTotal}>{itemCount}&nbsp; Items</span>&nbsp;: &pound; {cartTotal}
 
     </button>
 
