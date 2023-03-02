@@ -26,6 +26,7 @@ const Cart = () => {
 
     <div className={`${Styles.cartDeatils} ${detailsVisible? "" : "d-none"}`}>
         {contents.map((item: any, index: number) => {
+
             return (
                 <div key={index} className={Styles.cartItem}>
                     <div className={Styles.cartItemImage}>
@@ -35,7 +36,7 @@ const Cart = () => {
                         <div className={Styles.cartItemName}>{item.name}</div>
                         <div className={Styles.cartItemPrice}>&pound; {item.price}</div>
                         <div className={Styles.cartItemRemove}>
-                            <button type="button" className={`btn btn-outline-danger ${Styles.cartItemRemoveButton}`} onClick={() => removeItem(index)}>Remove</button>
+                            <button type="button" className={`btn btn-outline-danger ${Styles.cartItemRemoveButton}`} onClick={() => removeItem(item)}>Remove</button>
                         </div>
                     </div>
                 </div>

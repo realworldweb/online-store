@@ -11,6 +11,7 @@ interface cartType {
 	contents: item[],
 	addItem: Function | null,
     cartTotal: number,
+	itemCount: number,
 	removeItem: Function | null,
 	clearAll: Function | null,
 	checkout: Function | null,
@@ -25,25 +26,38 @@ export default function Cart ({ children} : childrenType){
 	const [state, setState] = useState<cartType>({
 		contents: [],
         cartTotal: 0,
+		itemCount: 0,
 		addItem: null,
 		removeItem: null,
 		clearAll: null,
 		checkout: null,
 	});
 
+	
+	const itemCount = (items: item[]): number => {
+      return items.reduce((count: number, item: item) => count + item.qty, 0);
+	}
+
+
 	const addItem = (item: item) => {
+
 		setState((prev) => ({
 			...prev,
 			contents: [...prev.contents, item],
-            cartTotal: prev.cartTotal + item.price,
-		}));
+            cartTotal: prev.cartTotal + item.price  * item.qty,
+			itemCount: itemCount([...prev.contents, item]),
+        }));
+
 	};
 
-	const removeItem = (item: item) => {
+	const removeItem = (remove: item) => {
+		debugger;
 		setState((prev) => ({
 			...prev,
-			contents: prev.contents.filter((item) => item.id !== item.id),
-            cartTotal: prev.cartTotal - item.price,
+			contents: prev.contents.filter((item) => item.id !== remove.id),
+            cartTotal: prev.cartTotal - remove.price * remove.qty,
+			itemCount: itemCount(prev.contents.filter((item) => item.id !== remove.id)),
+
 		}));
 	};
 
@@ -52,6 +66,7 @@ export default function Cart ({ children} : childrenType){
 			...prev,
 			contents: [],
             cartTotal: 0,
+			itemCount: 0,
 		}));
 	};
 
@@ -60,6 +75,7 @@ export default function Cart ({ children} : childrenType){
 			...prev,
 			contents: [],
             cartTotal: 0,
+			itemCount: 0,
 		}));
 	};
 
@@ -70,6 +86,7 @@ export default function Cart ({ children} : childrenType){
 			return {
 				contents: [...prev.contents],
                 cartTotal: prev.cartTotal,
+				itemCount: itemCount(prev.contents),
 				addItem,
 				removeItem,
 				clearAll,

@@ -1,5 +1,5 @@
 /*react*/
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 /*next*/
 import Link from 'next/link';
@@ -32,7 +32,7 @@ function Header() {
 								className={`position-relative d-flex flex-column align-items-center mt-1  ${Styles.headerTopInfo}`}
 							>
 								<div
-									className={`d-flex position-relative w-100 flex-column align-items-center justify-content-center flex-md-row ${Styles.headerContact}`}
+									className={`d-flex position-relative m-0 w-100 flex-column align-items-center justify-content-center flex-md-row ${Styles.headerContact}`}
 								>
 									<div className={Styles.headerPhone}>
 										<SvgTelephone width='1rem' height='1rem' />
@@ -64,7 +64,7 @@ function Header() {
 											<Link href='/products'>Products</Link>
 										</nav>
 									</div>
-								</div>{' '}
+								</div>
 							</div>
 							{/*End Header Top Info*/}
 						</div>

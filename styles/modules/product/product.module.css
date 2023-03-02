@@ -1,0 +1,53 @@
+.productPage {
+    display: grid;
+    width: 85%;
+    min-width: 290px;
+    max-width: 900px;
+    grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      grid-template-areas:
+        "product-image"
+        "product-info"
+        "related-products"
+        "reviews";
+  
+    @media($sm) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+      grid-template-areas:
+        "product-image product-info"
+        "related-products related-products"
+        "reviews reviews";
+    }
+  
+  }
+  
+  .productImage {
+    grid-area: product-image;
+
+    img{
+        width: 100%;
+        height: auto;
+    }
+  }
+  
+  .productInfo {
+    grid-area: product-info;
+
+  }
+
+  .productQty{
+    width: fit-content;
+  }
+  
+  .relatedProducts {
+    grid-area: related-products;
+  
+  }
+  
+  .reviews {
+    grid-area: reviews;
+
+  }
+
+  

@@ -50,7 +50,6 @@ const  Home: NextPageWithLayout<myProps> = ({data}) => {
       <main className='d-flex position-relative flex-wrap px-4'>
       {
         data.map((product,index) => {
-        
           return (
            <ProductTile product={product} key={index} />
           )

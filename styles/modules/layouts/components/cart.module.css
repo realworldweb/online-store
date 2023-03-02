@@ -1,3 +1,6 @@
+.cart{
+ gap: 5px;
+}
 
 .cartButton{
     background-color: $blue;

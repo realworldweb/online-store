@@ -10,8 +10,9 @@ description: any;
 thumbnail: thumbnail;
 price: number;
 cursor?: string;
-
-
+seoTitle?: string;
+rating?: number;
+seoDescription?: string;
 
 }
 

@@ -88,6 +88,9 @@ const getProduct = async (id: string) => {
             name
             id
             description
+            rating
+            seoDescription
+            seoTitle
             thumbnail(size: 200) {
               url
               alt
@@ -105,6 +108,7 @@ const getProduct = async (id: string) => {
           }`,
     }),
 });
+
 const data = await response.json();
 const product = data.data.product;
 
