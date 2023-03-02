@@ -21,7 +21,7 @@ import ButtonStyles from '@/styles/modules/assets/button.module.css'
 
 /*data*/
 import { getProduct } from '@/lib/products';
-import { removeProductNotes } from '@/lib/helpers';
+import { removeProductNotes, starRating } from '@/lib/helpers';
 
 /*types*/
 
@@ -103,9 +103,12 @@ const Home: NextPageWithLayout<myProps> = ({ data }) => {
 								/>
 							</div >
 					</div>
-					<button className={`btn mt-3 d-block position-relative text-dark mx-auto ${ButtonStyles.gradientButtonSuccess}`} onClick={() => addItem({id: data.id, name: data.name, price: data.price, qty: Number(qty)})}>
+					<div className={`d-flex w-100 mx-3 my-3 py-2 align-items-center justify-content-center bg-grey ${Styles.productButton}`}>
+					<button className={`btn d-block position-relative text-dark ${ButtonStyles.gradientButtonSuccess}`} onClick={() => addItem({id: data.id, name: data.name, price: data.price, qty: Number(qty)})}>
 						<p className='m-0 p-0'>Add to cart</p>
 					</button>
+					<div>{starRating(data.rating ?? 0).map(star => star)}</div>
+					</div>
 				</div>
 			</main>
 		</>

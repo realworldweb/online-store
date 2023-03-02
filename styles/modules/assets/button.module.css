@@ -2,6 +2,7 @@
 .gradientButtonSuccess, .gradientButtonDanger {
     font-size: 18px;
     overflow: hidden;
+    z-index: 2;
 
     &:hover{
       color: unset;

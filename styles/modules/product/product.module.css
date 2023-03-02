@@ -39,6 +39,10 @@
   .productQty{
     width: fit-content;
   }
+
+  .productButton{
+    gap: 30px;
+  }
   
   .relatedProducts {
     grid-area: related-products;
