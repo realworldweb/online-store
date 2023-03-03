@@ -69,3 +69,27 @@ export function SvgStar(props: SVGProps<SVGSVGElement>) {
 	  <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 24" {...rest}><path fill={fill ? fill : 'currentColor'} d="M12 8.125v7.8l3.15 1.925l-.825-3.6l2.775-2.4l-3.65-.325l-1.45-3.4Zm0 10.15l-4.15 2.5q-.275.175-.575.15t-.525-.2q-.225-.175-.35-.438t-.05-.587l1.1-4.725L3.775 11.8q-.25-.225-.312-.513t.037-.562q.1-.275.3-.45t.55-.225l4.85-.425l1.875-4.45q.125-.3.388-.45t.537-.15q.275 0 .537.15t.388.45l1.875 4.45l4.85.425q.35.05.55.225t.3.45q.1.275.038.563t-.313.512l-3.675 3.175l1.1 4.725q.075.325-.05.588t-.35.437q-.225.175-.525.2t-.575-.15l-4.15-2.5Z" /></svg>
 	)
   }
+
+  export function SvgCaretBack(props: SVGProps<SVGSVGElement>) {
+	const { width, height, fill, ...rest } = props;
+	return (
+		<svg width={width} height={height} viewBox='0 0 512 512' {...rest}>
+			<path
+				fill={fill ? fill : 'currentColor'}
+				d='M321.94 98L158.82 237.78a24 24 0 0 0 0 36.44L321.94 414c15.57 13.34 39.62 2.28 39.62-18.22v-279.6c0-20.5-24.05-31.56-39.62-18.18Z'
+			/>
+		</svg>
+	);
+}
+
+export function SvgCaretForward(props: SVGProps<SVGSVGElement>) {
+	const { width, height, fill, ...rest } = props;
+	return (
+		<svg width={width} height={height} viewBox='0 0 512 512' {...rest}>
+			<path
+				fill={fill ? fill : 'currentColor'}
+				d='m190.06 414l163.12-139.78a24 24 0 0 0 0-36.44L190.06 98c-15.57-13.34-39.62-2.28-39.62 18.22v279.6c0 20.5 24.05 31.56 39.62 18.18Z'
+			/>
+		</svg>
+	);
+}

@@ -11,6 +11,7 @@ const getProducts = async (amount = 8) => {
             query:
             `query GetProducts{
             products(channel: "uk", first: ${amount}) {
+
                   edges {
                     node {
                       id
@@ -30,48 +31,78 @@ const getProducts = async (amount = 8) => {
                       }
                       name
                     }
-                    cursor
                   }
+                  pageInfo {
+                    endCursor
+                    hasNextPage
+                    hasPreviousPage
+                    startCursor
+                  }
+                  totalCount
                   }
               }`,
         }),
     })
     const data = await response.json();
-    const products = data.data.products.edges;
+    let products = data.data.products.edges;
+    products = products.map((product: any) => { return {...product.node, price: product.node.pricing.priceRangeUndiscounted.stop.gross.amount }})
+    const pageInfo = data.data.products.pageInfo;
 
-    return products.map((product: any) => { return {...product.node, price: product.node.pricing.priceRangeUndiscounted.stop.gross.amount, cursor : product.cursor}})
-;
+   
+
+return {products, pageInfo, totalCount: data.data.products.totalCount }
 
 }
 
-const getMoreProducts = async (after:string, amount = 8) => {
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            query:
-            `query GetProducts{
-            products(channel: "uk", first: ${amount}, after: "${after}") {
+const getMoreProducts = async (after: string, amount = 8) => {
+  const response = await fetch(url, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+          query:
+          `query GetProducts{
+          products(channel: "uk", first: ${amount} after: "${after}") {
 
                 edges {
                   node {
                     id
+                    thumbnail(size: 400) {
+                      url
+                      alt
                     }
+                    pricing {
+                      priceRangeUndiscounted {
+                        stop {
+                          gross {
+                            currency
+                            amount
+                          }
+                        }
+                      }
+                    }
+                    name
                   }
-                  cursor
-                  pageInfo {
-                 hasNextPage
-                  }
-
                 }
-              }`,
-        }),
-    })
-    const data = await response.json();
+                pageInfo {
+                  endCursor
+                  hasNextPage
+                  hasPreviousPage
+                  startCursor
+                }
+                totalCount
+                }
+            }`,
+      }),
+  })
+  const data = await response.json();
+  let products = data.data.products.edges;
+  products = products.map((product: any) => { return {...product.node, price: product.node.pricing.priceRangeUndiscounted.stop.gross.amount }})
+  const pageInfo = data.data.products.pageInfo;
 
-    return data.data;
+return {products, pageInfo, totalCount: data.data.products.totalCount }
+
 }
 
 const getProduct = async (id: string) => {
@@ -104,6 +135,9 @@ const getProduct = async (id: string) => {
                 }
               }
             }
+            productType {
+              id
+            }
           }
           }`,
     }),
@@ -111,6 +145,7 @@ const getProduct = async (id: string) => {
 
 const data = await response.json();
 const product = data.data.product;
+
 
 return {...product, description: JSON.parse(product.description), price: product.pricing.priceRangeUndiscounted.stop.gross.amount};
 }
