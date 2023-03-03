@@ -28,7 +28,7 @@ export async function getServerSideProps() {
    }
   */
   let data = await getProducts();
-  data = data.map((product: any) => {
+  data = data.products.map((product: any) => {
     product.name = removeProductNotes(product.name);
 
     return product

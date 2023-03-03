@@ -53,6 +53,7 @@ const Home: NextPageWithLayout<myProps> = ({
 	const [moreProducts, setMoreProducts] = useState(false);
 	const totalPages = Math.ceil(totalCount / 8);
 
+   //TODO: revisit this perhaps create a map of page numbers and cursors to allow more functionality.
 	useEffect(() => {
 		if (moreProducts === false) return;
 		 getMoreProducts(currentInfo.endCursor).then(
