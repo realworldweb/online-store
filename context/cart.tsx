@@ -6,11 +6,18 @@ import {
 	ReactElement,
 } from 'react';
 
+interface Image {
+	url: string;
+	alt: string;
+}
+
+
 interface item {
 	id: string;
 	name: string;
 	price: number;
 	qty: number;
+	image: Image;
 }
 
 interface cartType {

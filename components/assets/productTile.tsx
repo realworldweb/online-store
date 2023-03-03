@@ -57,6 +57,7 @@ const ProductTile: FC<MyProps> = ({ product }) => {
 								id: product.id,
 								name: product.name,
 								price: product.price,
+								image: { url: product.thumbnail?.url ?? '/no-image.png', alt: product.thumbnail?.alt ?? product.name},
 								qty: 1,
 							})
 						}
