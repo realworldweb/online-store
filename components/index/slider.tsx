@@ -11,7 +11,7 @@ const Slider = () => {
 					alt='pure products'
 					width='1800'
 					height='1200'
-				/>
+				priority />
 				<Image
 					src='/slider-image1.webp'
 					className={Styles.sliderImage}
