@@ -1,31 +1,31 @@
-.cart{
- gap: 5px;
+.cart {
+	gap: 5px;
 }
 
-.cartButton{
-    background-color: $blue;
-    color: #fff;
-    font-size: 1.2rem;
-    z-index: 2
+.cartButton {
+	background-color: $blue;
+	color: #fff;
+	font-size: 1.2rem;
+	z-index: 2;
 }
 
-.cartItemRemoveButton{
-    font-size: 0.6rem;
+.cartItemRemoveButton {
+	font-size: 0.6rem;
 }
 
-.cartItemList{
-    background-color: #fff;
-    visibility: hidden;
-    overflow: hidden;
-    width: 75%;
-    max-height: 0;
-    max-width: 370px;
-    padding-top: 25px;
-    margin-top: -25px;
-    transition: all 1.0s ease-in-out;
+.cartItemList {
+	background-color: #fff;
+	visibility: hidden;
+	overflow: hidden;
+	width: 75%;
+	max-height: 0;
+	max-width: 370px;
+	padding-top: 25px;
+	margin-top: -25px;
+	transition: all 1s ease-in-out;
 }
 
-.cartItemListIsOpen{
-   max-height: 500px;
-   visibility: visible;
+.cartItemListIsOpen {
+	max-height: 500px;
+	visibility: visible;
 }

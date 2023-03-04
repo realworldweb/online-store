@@ -18,24 +18,23 @@ const removeProductNotes = (str: string) => {
 };
 
 const starRating = (rating: number) => {
-
 	let half = rating % 1 === 0 ? false : true;
 
 	const stars: ReactElement[] = Array.from({ length: 5 }, (v, i) => {
-         
 		if (Math.floor(rating) >= i + 1) {
-            return <SvgStar width="1.6rem" height="1.6rem" fill='#ffcd3c' key={i} />;
+			return <SvgStar width='1.6rem' height='1.6rem' fill='#ffcd3c' key={i} />;
 		} else if (half) {
 			half = false;
 
-			return <SvgHalfStar width="1.6rem" height="1.6rem" fill='#ffcd3c' key={i} />;
+			return (
+				<SvgHalfStar width='1.6rem' height='1.6rem' fill='#ffcd3c' key={i} />
+			);
 		}
 
-		return <SvgStar width="1.6rem" height="1.6rem" fill='#fff' key={i} />;
+		return <SvgStar width='1.6rem' height='1.6rem' fill='#fff' key={i} />;
 	});
 
-    return stars;
-    
+	return stars;
 };
 
 export { removeProductNotes, starRating };

@@ -59,7 +59,9 @@ function Header() {
 										>
 											<em>Pretium</em>
 										</Link>
-										<nav className={`d-flex justify-content-between text-white position-relative ${Styles.headerNav}`}>
+										<nav
+											className={`d-flex justify-content-between text-white position-relative ${Styles.headerNav}`}
+										>
 											<Link href='/'>Home</Link>
 											<Link href='/products'>Products</Link>
 										</nav>

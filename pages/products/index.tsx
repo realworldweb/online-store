@@ -1,5 +1,5 @@
 /*react*/
-import { ReactElement, useState, useEffect } from 'react';
+import { ReactElement, useState } from 'react';
 
 /*next*/
 import Head from 'next/head';
@@ -28,18 +28,24 @@ export async function getServerSideProps() {
     amount: optional(default : 8 ) indicates how many products to fetch
    }
   */
-	const data = await getProducts();
-	const products = data.products.map((product: any) => {
-		product.name = removeProductNotes(product.name);
-
-		return product;
-	});
-
-	const pageInfo = data.pageInfo;
-	const totalCount = data.totalCount;
-
-	// Pass data to the page via props
-	return { props: { products, pageInfo, totalCount } };
+	try {
+		const data = await getProducts();
+		const products = data?.products.map((product: any) => {
+			product.name = removeProductNotes(product.name);
+	
+			return product;
+		});
+	
+		const pageInfo = data?.pageInfo;
+		const totalCount = data?.totalCount;
+	
+		// Pass data to the page via props
+		return { props: { products, pageInfo, totalCount } };
+	} catch (err) {
+		console.error(err);
+		return { props: { products: [], pageInfo: {}, totalCount: 0 } };
+		
+	}
 }
 
 const Home: NextPageWithLayout<myProps> = ({
@@ -50,36 +56,49 @@ const Home: NextPageWithLayout<myProps> = ({
 	const [currentPage, setCurrentPage] = useState(1);
   const [currentProducts, setCurrentProducts] = useState([products]);
   const [currentInfo, setCurrentInfo] = useState(pageInfo);
-	const [moreProducts, setMoreProducts] = useState(false);
 	const totalPages = Math.ceil(totalCount / 8);
 
    //TODO: revisit this perhaps create a map of page numbers and cursors to allow more functionality.
-	useEffect(() => {
-		if (moreProducts === false) return;
+	const moreProductsHandler = async () => {
 
-		 getMoreProducts(currentInfo.endCursor).then(
-      (newData) => {
-       
-        const newProducts = newData.products.map((product: any) => {
-          product.name = removeProductNotes(product.name);
+		if(currentProducts[currentPage]){ // if products cached use them
 
-          return product;
-      });
+			setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev));
+			return;
+		}
+		
+		//products are not cached, so fetch them
 
-       setCurrentInfo(newData.pageInfo);
+		try {
 
-       setCurrentProducts( prev => [...prev, newProducts]);
-  
-  
-      setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev))
-  
-      setMoreProducts(false);
-        
-      },
-     ).catch(err => console.error(err));
-
-  
-	}, [moreProducts]);
+			/*
+            calls the getMoreProducts to Fetch data from external API
+            args: {
+			cursor: required indicates where to start fetching products from
+            amount: optional(default : 8 ) indicates how many products to fetch
+            }
+           */
+			const newData = await getMoreProducts(currentInfo.endCursor)
+			
+			const newProducts = newData?.products.map((product: any) => {
+					product.name = removeProductNotes(product.name);
+		  
+					return product;
+				});
+		  
+				 setCurrentInfo(newData?.pageInfo);
+		  
+				 setCurrentProducts( prev => [...prev, newProducts]);
+			
+			
+				setCurrentPage((prev) => (prev < totalPages ? prev + 1 : prev))
+		  
+		
+		} catch (err) {
+			console.error(err);
+			
+		}
+	};
   
 	return (
 		<>
@@ -98,7 +117,7 @@ const Home: NextPageWithLayout<myProps> = ({
 						return <ProductTile product={product} key={index} />;
 					})}
 				</div>
-				<div className={`d-flex mx-auto mt-2 align-items-center`}>
+				<div className={`d-flex mx-auto mt-2 mb-3 align-items-center`}>
 					{currentInfo.hasPreviousPage && currentPage !== 1  ? (
 						<SvgCaretBack
 							onClick={() =>
@@ -113,7 +132,7 @@ const Home: NextPageWithLayout<myProps> = ({
 					</p>
 					{currentInfo.hasNextPage || currentPage < totalPages ? (
 						<SvgCaretForward
-							onClick={() => setMoreProducts(true)}
+							onClick={moreProductsHandler}
 							width='2rem'
 							height='2rem'
 						/>

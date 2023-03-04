@@ -14,15 +14,8 @@ import Styles from '../../styles/modules/layouts/components/cart.module.css';
 import { SvgBag } from '../../components/assets/svgs';
 
 const Cart = () => {
-	const {
-		contents,
-		cartTotal,
-		itemCount,
-		removeItem,
-		addItem,
-		clearAll,
-		checkout,
-	} = useCart();
+	const { contents, cartTotal, itemCount, removeItem, clearAll, checkout } =
+		useCart();
 	const [detailsVisible, setDetailsVisible] = useState(false);
 
 	return (

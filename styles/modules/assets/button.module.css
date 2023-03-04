@@ -1,63 +1,69 @@
+.gradientButtonSuccess,
+.gradientButtonDanger {
+	font-size: 18px;
+	overflow: hidden;
+	z-index: 2;
+	border: 2px solid #fff;
 
-.gradientButtonSuccess, .gradientButtonDanger {
-    font-size: 18px;
-    overflow: hidden;
-    z-index: 2;
-    border: 2px solid #fff;
+	&:hover {
+		color: unset;
+	}
 
-    &:hover{
-      color: unset;
-    }
+	&:focus {
+		outline: none;
+		box-shadow: none;
+		border: none;
+	}
+}
 
-    &:focus{
-        outline: none;
-        box-shadow: none;
-        border: none;
-    }
-   
-  }
+.gradientButtonSuccess {
+	background: hexToRgba(#2ecc71, 0.8);
 
-  .gradientButtonSuccess{
+	&:hover {
+		background: hexToRgba(#2ecc71, 0.8);
+	}
+}
 
-    background: hexToRgba(#2ecc71, 0.8);
+.gradientButtonDanger {
+	background: hexToRgba(#e74c3c, 0.8);
 
-    &:hover{
-        background: hexToRgba(#2ecc71, 0.8);
-      }
+	&:hover {
+		background: hexToRgba(#e74c3c, 0.8);
+	}
+}
 
-  }
+.gradientButtonSuccess::before,
+.gradientButtonDanger::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	transform: translateX(0);
+	transition: transform 0.6s ease;
+	z-index: -1;
+}
 
-  .gradientButtonDanger{
+.gradientButtonSuccess::before {
+	background: linear-gradient(
+		to right,
+		hexToRgba(#2ecc71, 0.8),
+		hexToRgba(#27ae60, 0.9),
+		hexToRgba(#2ecc71, 0.8)
+	);
+}
 
-    background: hexToRgba(#e74c3c, 0.8);
+.gradientButtonDanger::before {
+	background: linear-gradient(
+		to right,
+		hexToRgba(#e74c3c, 0.8),
+		hexToRgba(#c0392b, 0.9),
+		hexToRgba(#e74c3c, 0.8)
+	);
+}
 
-    &:hover{
-        background: hexToRgba(#e74c3c, 0.8);
-      }
-
-  }
-  
-  .gradientButtonSuccess::before, .gradientButtonDanger::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    transform: translateX(0);
-    transition: transform 0.6s ease;
-    z-index: -1;
-  }
-
-  .gradientButtonSuccess::before {
-    background: linear-gradient(to right, hexToRgba(#2ecc71, 0.8), hexToRgba(#27ae60, 0.9), hexToRgba(#2ecc71, 0.8));
-  }
-
-  .gradientButtonDanger::before {
-    background: linear-gradient(to right, hexToRgba(#e74c3c, 0.8), hexToRgba(#c0392b, 0.9), hexToRgba(#e74c3c, 0.8));
-  }
-  
-  .gradientButtonSuccess:hover::before, .gradientButtonDanger:hover::before  {
-    transform: translateX(200%) skewX(-20deg);
-  }
-  
+.gradientButtonSuccess:hover::before,
+.gradientButtonDanger:hover::before {
+	transform: translateX(200%) skewX(-20deg);
+}

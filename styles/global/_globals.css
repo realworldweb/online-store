@@ -1,13 +1,13 @@
-.button{
-    all: unset;
+.button {
+	all: unset;
 }
 
-.p-lr-80{
-    @media($md){
-        padding: 0 80px;
-    }
+.p-lr-80 {
+	@media ($md) {
+		padding: 0 80px;
+	}
 }
 
-.bg-grey{
-    background-color: #708090 ;
+.bg-grey {
+	background-color: #708090;
 }

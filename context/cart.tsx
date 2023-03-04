@@ -11,7 +11,6 @@ interface Image {
 	alt: string;
 }
 
-
 interface item {
 	id: string;
 	name: string;
@@ -65,8 +64,8 @@ export default function Cart({ children }: childrenType) {
 
 				const contents = [...prev.contents];
 
-                 contents.splice(existingItem, 1, updatedItem);
-				 
+				contents.splice(existingItem, 1, updatedItem);
+
 				return {
 					...prev,
 					contents,
@@ -117,15 +116,15 @@ export default function Cart({ children }: childrenType) {
 		if (state.addItem) return;
 
 		const existing = localStorage.getItem('cart');
-		const existingData : cartType = existing && JSON.parse(existing);
-		 
-
+		const existingData: cartType = existing && JSON.parse(existing);
 
 		setState((prev) => {
 			return {
 				contents: existing ? existingData.contents : [...prev.contents],
 				cartTotal: existing ? existingData.cartTotal : prev.cartTotal,
-				itemCount: existing ? itemCount(existingData.contents):itemCount(prev.contents),
+				itemCount: existing
+					? itemCount(existingData.contents)
+					: itemCount(prev.contents),
 				addItem,
 				removeItem,
 				clearAll,
@@ -137,7 +136,7 @@ export default function Cart({ children }: childrenType) {
 	useEffect(() => {
 		if (state.addItem === null) return;
 		localStorage.setItem('cart', JSON.stringify(state));
-	},[state.contents]);
+	}, [state.contents]);
 
 	return <cartContext.Provider value={state}>{children}</cartContext.Provider>;
 }

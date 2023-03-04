@@ -1,41 +1,41 @@
-.headerTopArea{
-    background: #252525;
-    font-size: 14px;
-    z-index: 99999;
+.headerTopArea {
+	background: #252525;
+	font-size: 14px;
+	z-index: 99999;
 }
 
-.headerTopInfo{
-    color: #fff;
-    text-decoration: none;
+.headerTopInfo {
+	color: #fff;
+	text-decoration: none;
 
-    div{
-        position: relative;
-        margin-right: 40px;
+	div {
+		position: relative;
+		margin-right: 40px;
 
-        &:last-child{
-            margin-right: 0;
-        }
-    }
+		&:last-child {
+			margin-right: 0;
+		}
+	}
 }
 
-.headerLogo{
-    font-size: 1.5rem;
-    color: #fff;
+.headerLogo {
+	font-size: 1.5rem;
+	color: #fff;
 
-    @media($sm){
-        font-size: 2.3rem;
-    }
+	@media ($sm) {
+		font-size: 2.3rem;
+	}
 }
 
-.headerNav{
-    gap: 20px;
-    a{
-        color: #fff;
-        font-size: 1rem;
-        text-decoration: none;
+.headerNav {
+	gap: 20px;
+	a {
+		color: #fff;
+		font-size: 1rem;
+		text-decoration: none;
 
-        @media($sm){
-            font-size: 1.5rem;
-        }
-    }
+		@media ($sm) {
+			font-size: 1.5rem;
+		}
+	}
 }
