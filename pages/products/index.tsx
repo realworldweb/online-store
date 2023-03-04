@@ -76,7 +76,7 @@ const Home: NextPageWithLayout<myProps> = ({
       setMoreProducts(false);
         
       },
-     ).catch(err => console.log(err));
+     ).catch(err => console.error(err));
 
   
 	}, [moreProducts]);

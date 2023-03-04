@@ -2,7 +2,7 @@
     display: grid;
     width: 85%;
     min-width: 290px;
-    max-width: 900px;
+    max-width: 1200px;
     grid-template-columns: 1fr;
       grid-template-rows: auto;
       grid-template-areas:
@@ -17,7 +17,6 @@
       grid-template-areas:
         "product-image product-info"
         "related-products related-products"
-        "reviews reviews";
     }
   
   }
@@ -33,7 +32,7 @@
   
   .productInfo {
     grid-area: product-info;
-
+    max-width: 400px;
   }
 
   .productQty{
@@ -46,12 +45,7 @@
   
   .relatedProducts {
     grid-area: related-products;
-  
   }
   
-  .reviews {
-    grid-area: reviews;
-
-  }
 
   

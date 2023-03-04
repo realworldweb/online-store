@@ -21,7 +21,7 @@ const ProductTile: FC<MyProps> = ({ product }) => {
 	const { addItem } = useCart();
 
 	return (
-		<div
+		<article
 			className={`d-flex flex-column position-relative mx-auto mt-4 p-3 align-items-center ${Styles.productTile}`}
 			tabIndex={0}
 		>
@@ -77,7 +77,7 @@ const ProductTile: FC<MyProps> = ({ product }) => {
 					More info
 				</Link>
 			</div>
-		</div>
+		</article>
 	);
 };
 

@@ -44,7 +44,6 @@ const getProducts = async (amount = 8) => {
         }),
     })
     const data = await response.json();
-    console.log(data);
     let products = data.data.products.edges;
     products = products.map((product: any) => { return {...product.node, price: product.node.pricing.priceRangeUndiscounted.stop.gross.amount }})
     const pageInfo = data.data.products.pageInfo;
@@ -123,7 +122,7 @@ const getProduct = async (id: string) => {
             rating
             seoDescription
             seoTitle
-            thumbnail(size: 200) {
+            thumbnail(size: 250) {
               url
               alt
             }
@@ -136,8 +135,30 @@ const getProduct = async (id: string) => {
                 }
               }
             }
-            productType {
-              id
+            category {
+              slug
+              products(channel: "uk", first: 8, ) {
+                edges {
+                  node {
+                    name
+                    id
+                    thumbnail(size: 200) {
+                      url
+                      alt
+                    }
+                    pricing {
+                      priceRangeUndiscounted {
+                        stop {
+                          gross {
+                            currency
+                            amount
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
           }`,

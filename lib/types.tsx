@@ -13,7 +13,7 @@ cursor?: string;
 seoTitle?: string;
 rating?: number;
 seoDescription?: string;
-
+category: any;
 }
 
 export type {
