@@ -24,7 +24,7 @@ const Cart = () => {
 
 	return (
 		<div
-			className={`d-flex w-100 flex-column position-relative align-items-center ${Styles.cart}`}
+			className={`d-flex w-100 flex-column position-relative mx-auto align-items-center ${Styles.cart}`}
 		>
 			<button
 				type='button'
@@ -81,7 +81,8 @@ const Cart = () => {
 					<span>&pound;{parseFloat(String(cartTotal)).toFixed(2)}</span>
 				</p>
 				<hr className='d-block w-100' />
-				<button onClick={checkout} className='btn mb-3 w-75 btn-primary mx-auto'>Checkout</button>
+				<button onClick={checkout} className='btn mb-1 w-75 btn-primary mx-auto'>Checkout</button>
+                <button onClick={clearAll} className='btn mb-3 w-75 btn-outline-danger mx-auto'>Clear cart</button>
 			</div>
 		</div>
 	);

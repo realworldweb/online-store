@@ -29,7 +29,7 @@ function Header() {
 						<div className='col-lg-12'>
 							{/*Start Header Top Info*/}
 							<div
-								className={`position-relative d-flex flex-column align-items-center mt-1  ${Styles.headerTopInfo}`}
+								className={`position-relative w-100 d-flex flex-column align-items-center mt-1  ${Styles.headerTopInfo}`}
 							>
 								<div
 									className={`d-flex position-relative m-0 w-100 flex-column align-items-center justify-content-center flex-md-row ${Styles.headerContact}`}

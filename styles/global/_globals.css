@@ -3,7 +3,9 @@
 }
 
 .p-lr-80{
-    padding: 0 80px;
+    @media($md){
+        padding: 0 80px;
+    }
 }
 
 .bg-grey{

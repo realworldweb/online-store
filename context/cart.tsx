@@ -118,7 +118,6 @@ export default function Cart({ children }: childrenType) {
 
 		const existing = localStorage.getItem('cart');
 		const existingData : cartType = existing && JSON.parse(existing);
-         console.log(existingData);
 		 
 
 
