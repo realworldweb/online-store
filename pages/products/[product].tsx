@@ -4,6 +4,7 @@ import { ReactElement, useState } from 'react';
 /*next*/
 import Head from 'next/head';
 import type { NextPageWithLayout } from '.././_app';
+import Image from 'next/image';
 
 /*layout*/
 import Layout from '@/layouts/main';
@@ -64,12 +65,10 @@ const Home: NextPageWithLayout<myProps> = ({ product }) => {
 			</Head>
 			<main className={`mx-auto ${Styles.productPage}`}>
 					<div className={`mx-auto mt-3 ${Styles.productImage}`}>
-						<img
-							width='400'
+						<Image width='400'
 							height='200'
 							src={product.thumbnail?.url ? product.thumbnail?.url : '/no-image.png'}
-							alt={product.thumbnail?.alt ? product.thumbnail?.alt : 'presentation'}
-						/>
+							alt={product.thumbnail?.alt ? product.thumbnail?.alt : 'presentation'} />
 					</div>
 				<div className={`mx-auto ${Styles.productInfo}`}>
 					<h1 className='mt-4 text-center mx-auto'><em>{product.name.trim()}</em></h1>

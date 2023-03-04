@@ -3,6 +3,7 @@ import { FC } from 'react';
 
 /*next*/
 import Link from 'next/link';
+import Image from 'next/image';
 
 /*context*/
 import { useCart } from '@/context/cart';
@@ -26,7 +27,7 @@ const ProductTile: FC<MyProps> = ({ product }) => {
 		>
 			<Link href={`/products/${product.id}`} tabIndex={0}>
 				<div>
-					<img
+					<Image
 						width='250'
 						height='150'
 						src={
@@ -51,29 +52,32 @@ const ProductTile: FC<MyProps> = ({ product }) => {
 				<span className='d-flex position-relative mx-auto fw-bold justify-content-center mb-3'>
 					&pound;{parseFloat(String(product.price)).toFixed(2)}
 				</span>
-					<button
-						onClick={() =>
-							addItem({
-								id: product.id,
-								name: product.name,
-								price: product.price,
-								image: { url: product.thumbnail?.url ?? '/no-image.png', alt: product.thumbnail?.alt ?? product.name},
-								qty: 1,
-							})
-						}
-						className={`btn d-block w-75 position-relative text-dark mx-auto ${ButtonStyles.gradientButtonSuccess}`}
-					>
-						Add to cart
-					</button>
-					<Link
-						href={`/products/${product.id}`}
-						className={`btn mt-1 w-75 d-block position-relative text-dark mx-auto ${ButtonStyles.gradientButtonDanger}`}
-						tabIndex={0}
-					>
-						More info
-					</Link>
-				</div>
+				<button
+					onClick={() =>
+						addItem({
+							id: product.id,
+							name: product.name,
+							price: product.price,
+							image: {
+								url: product.thumbnail?.url ?? '/no-image.png',
+								alt: product.thumbnail?.alt ?? product.name,
+							},
+							qty: 1,
+						})
+					}
+					className={`btn d-block w-75 position-relative text-dark mx-auto ${ButtonStyles.gradientButtonSuccess}`}
+				>
+					Add to cart
+				</button>
+				<Link
+					href={`/products/${product.id}`}
+					className={`btn mt-1 w-75 d-block position-relative text-dark mx-auto ${ButtonStyles.gradientButtonDanger}`}
+					tabIndex={0}
+				>
+					More info
+				</Link>
 			</div>
+		</div>
 	);
 };
 

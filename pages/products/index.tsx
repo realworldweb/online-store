@@ -56,6 +56,7 @@ const Home: NextPageWithLayout<myProps> = ({
    //TODO: revisit this perhaps create a map of page numbers and cursors to allow more functionality.
 	useEffect(() => {
 		if (moreProducts === false) return;
+
 		 getMoreProducts(currentInfo.endCursor).then(
       (newData) => {
        
@@ -110,7 +111,7 @@ const Home: NextPageWithLayout<myProps> = ({
 					<p className='m-0 p-0'>
 						Page: {currentPage} / {totalPages}{' '}
 					</p>
-					{currentInfo.hasNextPage ? (
+					{currentInfo.hasNextPage || currentPage < totalPages ? (
 						<SvgCaretForward
 							onClick={() => setMoreProducts(true)}
 							width='2rem'

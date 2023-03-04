@@ -44,6 +44,7 @@ const getProducts = async (amount = 8) => {
         }),
     })
     const data = await response.json();
+    console.log(data);
     let products = data.data.products.edges;
     products = products.map((product: any) => { return {...product.node, price: product.node.pricing.priceRangeUndiscounted.stop.gross.amount }})
     const pageInfo = data.data.products.pageInfo;

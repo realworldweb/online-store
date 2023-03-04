@@ -1,6 +1,9 @@
 /*react*/
 import { useState } from 'react';
 
+/*next*/
+import Image from 'next/image';
+
 /*context*/
 import { useCart } from '@/context/cart';
 
@@ -38,8 +41,9 @@ const Cart = () => {
 			</button>
 
 			<div
-				className={`d-flex bg-white flex-column align-items-center ${Styles.cartItemList} ${ detailsVisible ? Styles.cartItemListIsOpen : ''}`}
-
+				className={`d-flex bg-white flex-column align-items-center ${
+					Styles.cartItemList
+				} ${detailsVisible ? Styles.cartItemListIsOpen : ''}`}
 			>
 				{contents.map((item: any, index: number) => {
 					return (
@@ -48,9 +52,9 @@ const Cart = () => {
 							className={`d-flex w-100 mx-auto mt-2 fw-bold text-dark ${Styles.cartItem}`}
 						>
 							<div className={`mx-auto ${Styles.cartItemImage}`}>
-								<img
-									width='150px'
-									height='80px'
+								<Image
+									width='150'
+									height='80'
 									src={item.image.url}
 									alt={item.image.alt}
 								/>
@@ -81,8 +85,18 @@ const Cart = () => {
 					<span>&pound;{parseFloat(String(cartTotal)).toFixed(2)}</span>
 				</p>
 				<hr className='d-block w-100' />
-				<button onClick={checkout} className='btn mb-1 w-75 btn-primary mx-auto'>Checkout</button>
-                <button onClick={clearAll} className='btn mb-3 w-75 btn-outline-danger mx-auto'>Clear cart</button>
+				<button
+					onClick={checkout}
+					className='btn mb-1 w-75 btn-primary mx-auto'
+				>
+					Checkout
+				</button>
+				<button
+					onClick={clearAll}
+					className='btn mb-3 w-75 btn-outline-danger mx-auto'
+				>
+					Clear cart
+				</button>
 			</div>
 		</div>
 	);

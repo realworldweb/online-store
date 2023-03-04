@@ -16,6 +16,7 @@ import ProductTile from '@/components/assets/productTile';
 /*types*/
 
 import { Item } from '@/lib/types';
+import Slider from '@/components/index/slider';
 interface myProps {
   data: Item[];
 }
@@ -47,7 +48,10 @@ const  Home: NextPageWithLayout<myProps> = ({data}) => {
         <meta name="description" content="online store for comestics and pampering products for him and her" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <main className='d-flex flex-column flex-md-row position-relative flex-wrap px-4'>
+      <main className='d-flex flex-column px-4'>
+      <Slider />
+      <h1 className='d-flex position-relative mt-2 fw-bold pl-5'><em>Our products</em></h1>
+      <section className='d-flex flex-column flex-md-row position-relative flex-wrap px-4'>
       {
         data.map((product,index) => {
           return (
@@ -55,6 +59,7 @@ const  Home: NextPageWithLayout<myProps> = ({data}) => {
           )
         })
       }
+      </section>
       </main>
     </>
   )
