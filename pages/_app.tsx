@@ -6,7 +6,7 @@ import type { AppProps } from 'next/app';
 import type { NextPage } from 'next';
 
 /*context*/
-import Cart from '../context/cart';
+import { CartProvider } from '../context/cart';
 
 /*styles*/
 import '../styles/master.css';
@@ -23,5 +23,5 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 	// Use the layout defined at the page level, if available
 	const getLayout = Component.getLayout ?? ((page) => page);
 
-	return <Cart>{getLayout(<Component {...pageProps} />)}</Cart>;
+	return <CartProvider>{getLayout(<Component {...pageProps} />)}</CartProvider>;
 }

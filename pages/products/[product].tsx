@@ -10,7 +10,7 @@ import Image from 'next/image';
 import Layout from '@/layouts/main';
 
 /*context*/
-import { useCart } from '@/context/cart';
+import { CartContextType, useCart } from '@/context/cart';
 
 /*components*/
 import ProductTile from '@/components/assets/productTile';
@@ -42,23 +42,23 @@ export async function getServerSideProps(context: any) {
   */
 	try {
 		const productId = context.params.product;
-	
+
 		const product = await getProduct(productId);
-	
+
 		product.name = removeProductNotes(product.name);
-	
+
 		const relatedProducts = product.category.products.edges.map(
 			(product: any) => ({
 				...product.node,
 				price: product.node.pricing.priceRangeUndiscounted.stop.gross.amount,
 			})
 		);
-	
+
 		// Pass product to the page via props
 		return { props: { product, relatedProducts } };
 	} catch (err) {
 		console.error(err);
-		
+
 		return { props: {} };
 	}
 }
@@ -66,7 +66,7 @@ export async function getServerSideProps(context: any) {
 const Home: NextPageWithLayout<myProps> = ({ product, relatedProducts }) => {
 	const [qty, setQty] = useState('1');
 
-	const { addItem } = useCart();
+	const { dispatch } = useCart() as CartContextType;
 
 	return (
 		<>
@@ -134,7 +134,7 @@ const Home: NextPageWithLayout<myProps> = ({ product, relatedProducts }) => {
 					<button
 						className={`btn w-75 d-block position-relative mx-auto text-dark ${ButtonStyles.gradientButtonSuccess}`}
 						onClick={() =>
-							addItem({
+							dispatch.addCartItem({
 								id: product.id,
 								name: product.name,
 								image: {

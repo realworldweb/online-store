@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 /*context*/
-import { useCart } from '@/context/cart';
+import { CartContextType, useCart } from '@/context/cart';
 
 /*styles*/
 import Styles from '../../styles/modules/layouts/components/cart.module.css';
@@ -14,8 +14,8 @@ import Styles from '../../styles/modules/layouts/components/cart.module.css';
 import { SvgBag } from '../../components/assets/svgs';
 
 const Cart = () => {
-	const { contents, cartTotal, itemCount, removeItem, clearAll, checkout } =
-		useCart();
+	const { state, dispatch } = useCart() as CartContextType;
+
 	const [detailsVisible, setDetailsVisible] = useState(false);
 
 	return (
@@ -29,8 +29,8 @@ const Cart = () => {
 			>
 				<SvgBag width='1.5rem' height='1.5rem' />
 				&nbsp;
-				<span className={Styles.cartTotal}>{itemCount}&nbsp; Items</span>&nbsp;:
-				&pound; {cartTotal}
+				<span className={Styles.cartTotal}>{state.cartItemCount}&nbsp; Items</span>&nbsp;:
+				&pound; {state.cartTotal}
 			</button>
 
 			<div
@@ -38,7 +38,7 @@ const Cart = () => {
 					Styles.cartItemList
 				} ${detailsVisible ? Styles.cartItemListIsOpen : ''}`}
 			>
-				{contents.map((item: any, index: number) => {
+				{state.contents.map((item: any, index: number) => {
 					return (
 						<div
 							key={index}
@@ -64,7 +64,7 @@ const Cart = () => {
 									<button
 										type='button'
 										className={`btn mx-auto btn-outline-danger ${Styles.cartItemRemoveButton}`}
-										onClick={() => removeItem(item)}
+										onClick={() => dispatch.removeCartItem(item)}
 									>
 										Remove
 									</button>
@@ -75,17 +75,17 @@ const Cart = () => {
 				})}
 				<p className='d-flex w-100 fw-bold mt-2 text-dark px-5 justify-content-between'>
 					<span>Total:</span>
-					<span>&pound;{parseFloat(String(cartTotal)).toFixed(2)}</span>
+					<span>&pound;{parseFloat(String(state.cartTotal)).toFixed(2)}</span>
 				</p>
 				<hr className='d-block w-100' />
 				<button
-					onClick={checkout}
+					onClick={() => dispatch.checkout()}
 					className='btn mb-1 w-75 btn-primary mx-auto'
 				>
 					Checkout
 				</button>
 				<button
-					onClick={clearAll}
+					onClick={() => dispatch.clearAll()}
 					className='btn mb-3 w-75 btn-outline-danger mx-auto'
 				>
 					Clear cart

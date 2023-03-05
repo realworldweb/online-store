@@ -7,21 +7,24 @@ import Image from 'next/image';
 
 /*context*/
 import { useCart } from '@/context/cart';
+import { CartContextType } from '@/context/cart';
 
 /*styles*/
 import Styles from '@/styles/modules/assets/productTile.module.css';
 import ButtonStyles from '@/styles/modules/assets/button.module.css';
 
 /*types*/
+import { Item } from '@/lib/types';
 interface MyProps {
-	product: any;
+	product: Item;
 }
 
 const ProductTile: FC<MyProps> = ({ product }) => {
-	const { addItem } = useCart();
-
-	return (
-		<article
+	
+	const { dispatch } = useCart() as CartContextType;
+	
+ return (
+	<article
 			className={`d-flex flex-column position-relative mx-auto mt-4 p-3 align-items-center ${Styles.productTile}`}
 			tabIndex={0}
 		>
@@ -54,7 +57,7 @@ const ProductTile: FC<MyProps> = ({ product }) => {
 				</span>
 				<button
 					onClick={() =>
-						addItem({
+						dispatch.addCartItem({
 							id: product.id,
 							name: product.name,
 							price: product.price,

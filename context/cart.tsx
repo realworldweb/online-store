@@ -1,17 +1,11 @@
-import {
-	useEffect,
-	useState,
-	createContext,
-	useContext,
-	ReactElement,
-} from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 interface Image {
 	url: string;
 	alt: string;
 }
 
-interface item {
+interface CartItem {
 	id: string;
 	name: string;
 	price: number;
@@ -19,128 +13,174 @@ interface item {
 	image: Image;
 }
 
-interface cartType {
-	contents: item[];
-	addItem: Function | null;
+interface CartState {
+	contents: CartItem[];
 	cartTotal: number;
-	itemCount: number;
-	removeItem: Function | null;
-	clearAll: Function | null;
-	checkout: Function | null;
+	cartItemCount: number;
+	loaded: boolean;
+
 }
 
-interface childrenType {
-	children: ReactElement | ReactElement[];
+interface Action {
+	type: string;
+	payload?: any;
 }
 
-const cartContext = createContext<cartType | any>({});
+interface CartAction {
+	addCartItem: Function;
+	removeCartItem: Function;
+	clearAll: Function;
+	checkout: Function;
+}
+export interface CartContextType  {
+	state: CartState;
+	dispatch: CartAction;
+}
 
-export default function Cart({ children }: childrenType) {
-	const [state, setState] = useState<cartType>({
-		contents: [],
-		cartTotal: 0,
-		itemCount: 0,
-		addItem: null,
-		removeItem: null,
-		clearAll: null,
-		checkout: null,
-	});
+const initialState: CartState = {
+	contents: [],
+	cartTotal: 0,
+	cartItemCount: 0,
+	loaded: false,
 
-	const itemCount = (items: item[]): number => {
-		return items.reduce((count: number, item: item) => count + item.qty, 0);
-	};
+};
 
-	const addItem = (item: item) => {
-		setState((prev) => {
-			const existingItem = [...prev.contents].findIndex(
-				(i: item) => i.id === item.id
+const cartReducer = (state: CartState, action: Action) => {
+	console.log(state,action);
+	
+	switch (action.type) {
+		case 'INIT':
+			return {
+                ...state,
+                contents: action.payload.contents,
+                cartTotal: action.payload.cartTotal,
+                cartItemCount: action.payload.cartItemCount,
+                loaded: action.payload.loaded,
+            };
+    
+		case 'ADD_CartItem':
+			const existingCartItemIndex = state.contents.findIndex(
+				(CartItem) => CartItem.id === action.payload.id
 			);
-
-			if (existingItem !== -1) {
-				const updatedItem = {
-					...prev.contents[existingItem],
-					qty: prev.contents[existingItem].qty + item.qty,
+			if (existingCartItemIndex !== -1) {
+				const existingCartItem = state.contents[existingCartItemIndex];
+				const updatedCartItem = {
+					...existingCartItem,
+					qty: existingCartItem.qty + action.payload.qty,
 				};
-
-				const contents = [...prev.contents];
-
-				contents.splice(existingItem, 1, updatedItem);
-
+				const updatedContents = [...state.contents];
+				updatedContents.splice(existingCartItemIndex, 1, updatedCartItem);
 				return {
-					...prev,
-					contents,
-					cartTotal: prev.cartTotal + item.price * item.qty,
-					itemCount: itemCount([...contents]),
+					...state,
+					contents: updatedContents,
+					cartTotal:
+						state.cartTotal + action.payload.price * action.payload.qty,
+					cartItemCount: state.cartItemCount + action.payload.qty,
+					loaded: true,
+				};
+			} else {
+				return {
+					...state,
+					contents: [...state.contents, action.payload],
+					cartTotal:
+						state.cartTotal + action.payload.price * action.payload.qty,
+					cartItemCount: state.cartItemCount + action.payload.qty,
+					loaded: true,
 				};
 			}
-
+		case 'REMOVE_CartItem':
+			const updatedContents = state.contents.filter(
+				(CartItem) => CartItem.id !== action.payload.id
+			);
+			const removedCartItem = state.contents.find(
+				(CartItem) => CartItem.id === action.payload.id
+			)!;
 			return {
-				...prev,
-				contents: [...prev.contents, item],
-				cartTotal: prev.cartTotal + item.price * item.qty,
-				itemCount: itemCount([...prev.contents, item]),
+				...state,
+				contents: updatedContents,
+				cartTotal:
+					state.cartTotal - removedCartItem.price * removedCartItem.qty,
+				cartItemCount: state.cartItemCount - removedCartItem.qty,
 			};
-		});
+		case 'CLEAR_ALL':
+			return {
+				...state,
+				contents: [],
+				cartTotal: 0,
+				cartItemCount: 0,
+			};
+		case 'CHECKOUT':
+			return {
+				...state,
+				contents: [],
+				cartTotal: 0,
+				cartItemCount: 0,
+			};
+		default:
+			return state;
+	}
+};
+
+const CartContext = createContext<CartContextType | null>(null);
+
+interface CartProviderProps {
+	children: React.ReactNode;
+}
+
+const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+	const [state, dispatch] = useReducer(cartReducer, initialState);
+    
+	
+	useEffect(() => {
+		if(state.loaded) return;
+		const existing = localStorage.getItem('cart');
+		const existingData: CartState = existing && JSON.parse(existing);
+		
+	 
+		if (existingData) {
+			dispatch({ type: "INIT", payload: existingData });
+		}
+	},[state]);
+
+	useEffect(() => {
+		if(!state.loaded) return;
+		localStorage.setItem('cart', JSON.stringify(state));
+	}, [state]);
+
+	const addCartItem = (CartItem: CartItem) => {
+		dispatch({ type: 'ADD_CartItem', payload: CartItem });
 	};
 
-	const removeItem = (remove: item) => {
-		setState((prev) => ({
-			...prev,
-			contents: prev.contents.filter((item) => item.id !== remove.id),
-			cartTotal: prev.cartTotal - remove.price * remove.qty,
-			itemCount: itemCount(
-				prev.contents.filter((item) => item.id !== remove.id)
-			),
-		}));
+	const removeCartItem = (CartItem: CartItem) => {
+		dispatch({ type: 'REMOVE_CartItem', payload: CartItem });
 	};
 
 	const clearAll = () => {
-		setState((prev) => ({
-			...prev,
-			contents: [],
-			cartTotal: 0,
-			itemCount: 0,
-		}));
+		dispatch({ type: 'CLEAR_ALL' });
 	};
 
 	const checkout = () => {
-		setState((prev) => ({
-			...prev,
-			contents: [],
-			cartTotal: 0,
-			itemCount: 0,
-		}));
+		dispatch({ type: 'CHECKOUT' });
 	};
 
-	useEffect(() => {
-		if (state.addItem) return;
+	return (
+		<CartContext.Provider
+			value={{
+				state,
+				dispatch: { addCartItem, removeCartItem, clearAll, checkout },
+			}}
+		>
+			{children}
+		</CartContext.Provider>
+	);
+};
 
-		const existing = localStorage.getItem('cart');
-		const existingData: cartType = existing && JSON.parse(existing);
+const useCart = () => {
+	const context = useContext(CartContext);
+    if (context === undefined) {
+        throw new Error('useCart must be used within a CartProvider');
+    }
+	return context;
+};
 
-		setState((prev) => {
-			return {
-				contents: existing ? existingData.contents : [...prev.contents],
-				cartTotal: existing ? existingData.cartTotal : prev.cartTotal,
-				itemCount: existing
-					? itemCount(existingData.contents)
-					: itemCount(prev.contents),
-				addItem,
-				removeItem,
-				clearAll,
-				checkout,
-			};
-		});
-	});
-
-	useEffect(() => {
-		if (state.addItem === null) return;
-		localStorage.setItem('cart', JSON.stringify(state));
-	}, [state.contents]);
-
-	return <cartContext.Provider value={state}>{children}</cartContext.Provider>;
-}
-
-export function useCart() {
-	return useContext(cartContext);
-}
+export { CartProvider, useCart };
