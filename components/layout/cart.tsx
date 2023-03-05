@@ -44,37 +44,41 @@ const Cart = () => {
 			>
 				{state.contents.map((item: CartItem, index: number) => {
 					return (
-						<div
-							key={index}
-							className={`d-flex w-100 mx-auto mt-2 fw-bold text-dark ${Styles.cartItem}`}
-						>
-							<div className={`mx-auto ${Styles.cartItemImage}`}>
-								<Image
-									width='150'
-									height='80'
-									src={item.image.url}
-									alt={item.image.alt}
-								/>
-							</div>
-							<div className={`mx-auto ${Styles.cartItemDetails}`}>
-								<p className='d-flex flex-wrap mx-auto m-0 p-0 text-center'>
-									{item.name}
-								</p>
-								<div className='d-flex w-100 justify-content-between'>
-									<p>&pound;{parseFloat(String(item.price)).toFixed(2)}</p>
-									<p>Qty:&nbsp;{item.qty}</p>
+						<>
+							<div
+								key={index}
+								className={`d-flex flex-column flex-sm-row w-100 mx-auto mt-2 fw-bold text-dark ${Styles.cartItem}`}
+							>
+								<div className={`mx-auto ${Styles.cartItemImage}`}>
+									<Image
+										width='150'
+										height='80'
+										src={item.image.url}
+										alt={item.image.alt}
+									/>
 								</div>
-								<div className='d-flex w-100'>
-									<button
-										type='button'
-										className={`btn mx-auto btn-outline-danger ${Styles.cartItemRemoveButton}`}
-										onClick={() => dispatch.removeCartItem(item)}
-									>
-										Remove
-									</button>
+								<div className={`mx-auto ${Styles.cartItemDetails}`}>
+									<p className='d-flex flex-wrap mx-auto m-0 p-0 text-center'>
+										{item.name}
+									</p>
+									<div className='d-flex w-100 justify-content-between'>
+										<p>&pound;{parseFloat(String(item.price)).toFixed(2)}</p>
+										<p>Qty:&nbsp;{item.qty}</p>
+									</div>
+									<div className='d-flex w-100'>
+										<button
+											type='button'
+											className={`btn mx-auto btn-outline-danger ${Styles.cartItemRemoveButton}`}
+											onClick={() => dispatch.removeCartItem(item)}
+										>
+											Remove
+										</button>
+									</div>
 								</div>
 							</div>
-						</div>
+							<hr className='d-flex w-100 my-2 bg-black' key={index + 20} />
+						</>
+
 					);
 				})}
 				<p className='d-flex w-100 fw-bold mt-2 text-dark px-5 justify-content-between'>
