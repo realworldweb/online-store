@@ -11,3 +11,11 @@
 .bg-grey {
 	background-color: #708090;
 }
+
+.bg-black {
+	background-color: #000;
+}
+
+.gap-30{
+	gap: 30px;
+}

@@ -55,7 +55,7 @@ const Home: NextPageWithLayout<myProps> = ({ data }) => {
 				/>
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 			</Head>
-			<main className='d-flex flex-column px-4'>
+			<div className='d-flex flex-column px-4'>
 				<h1 className='d-flex position-relative mt-2 fw-bold pl-5'>
 					<em>Our products</em>
 				</h1>
@@ -64,7 +64,7 @@ const Home: NextPageWithLayout<myProps> = ({ data }) => {
 						return <ProductTile product={product} key={index} />;
 					})}
 				</section>
-			</main>
+			</div>
 		</>
 	);
 };

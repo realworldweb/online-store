@@ -104,7 +104,7 @@ const Home: NextPageWithLayout<myProps> = ({
 				/>
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 			</Head>
-			<main className='d-flex flex-column position-relative px-4'>
+			<div className='d-flex flex-column position-relative px-4'>
 				<h1 className='d-flex mt-3'>Products</h1>
 				<div className='d-flex position-relative flex-wrap px-4'>
 					{currentProducts[currentPage - 1].map((product, index) => {
@@ -132,7 +132,7 @@ const Home: NextPageWithLayout<myProps> = ({
 						/>
 					) : null}
 				</div>
-			</main>
+			</div>
 		</>
 	);
 };

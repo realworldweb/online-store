@@ -76,7 +76,7 @@ const Home: NextPageWithLayout<myProps> = ({ product, relatedProducts }) => {
 				<meta name='description' content={product.seoDescription} />
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 			</Head>
-			<main className={`mx-auto ${Styles.productPage}`}>
+			<div className={`mx-auto ${Styles.productPage}`}>
 				<section
 					className={`mx-auto d-flex flex-column align-items-center justify-content-center mt-3 ${Styles.productImage}`}
 				>
@@ -160,7 +160,7 @@ const Home: NextPageWithLayout<myProps> = ({ product, relatedProducts }) => {
 						})}
 					</div>
 				</section>
-			</main>
+			</div>
 		</>
 	);
 };
