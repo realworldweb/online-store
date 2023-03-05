@@ -10,7 +10,7 @@ const Hero = () => {
 			className={`d-flex mx-auto position-relative flex-column flex-md-row ${Styles.hero}`}
 		>
 			<div
-				className={`d-flex flex-column text-dark fw-bold ${Styles.heroTextContainer}`}
+				className={`d-flex position-relative flex-column text-dark fw-bold ${Styles.heroTextContainer}`}
 			>
 				<p
 					className={`d-flex position-relative m-0 p-0 mt-5 text-white ${Styles.tagline}`}
@@ -23,7 +23,7 @@ const Hero = () => {
 					And just a little bit of love
 				</p>
 			</div>
-			<div className={`position-relative w-75 ${Styles.HeroImage}`}>
+			<div className={`position-relative ${Styles.heroImage}`}>
 				<Image
 					src='/slider-image3.webp'
 					alt='made from Ethically sourced natural Indgredients And just a little bit of love'
