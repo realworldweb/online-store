@@ -16,4 +16,13 @@ interface Item {
 	category: any;
 }
 
-export type { Item };
+interface CartItem {
+	id: string;
+	name: string;
+	price: number;
+	qty: number;
+	image: thumbnail;
+}
+
+export type { Item, CartItem };
+

@@ -24,7 +24,7 @@ import { getProduct } from '@/lib/products';
 import { removeProductNotes, starRating } from '@/lib/helpers';
 
 /*types*/
-
+import { GetServerSideProps } from "next";
 import type { Item } from '@/lib/types';
 
 interface myProps {
@@ -32,7 +32,7 @@ interface myProps {
 	relatedProducts: Array<Item>;
 }
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
 	/*
    calls the getProduct to Fetch product from external API
    args: {
@@ -41,9 +41,10 @@ export async function getServerSideProps(context: any) {
    }
   */
 	try {
-		const productId = context.params.product;
+		const productId: string = context && context.params!.product as string;
+		
 
-		const product = await getProduct(productId);
+		const product = await getProduct(productId ?? "");
 
 		product.name = removeProductNotes(product.name);
 

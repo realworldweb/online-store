@@ -1,3 +1,5 @@
+import { Item } from './types';
+
 const url = 'https://twstg2.eu.saleor.cloud/graphql/';
 
 const getProducts = async (amount = 8) => {

@@ -13,6 +13,10 @@ import Styles from '../../styles/modules/layouts/components/cart.module.css';
 /*assets*/
 import { SvgBag } from '../../components/assets/svgs';
 
+/*types*/
+import { CartItem } from '../../lib/types';
+
+
 const Cart = () => {
 	const { state, dispatch } = useCart() as CartContextType;
 
@@ -38,7 +42,7 @@ const Cart = () => {
 					Styles.cartItemList
 				} ${detailsVisible ? Styles.cartItemListIsOpen : ''}`}
 			>
-				{state.contents.map((item: any, index: number) => {
+				{state.contents.map((item: CartItem, index: number) => {
 					return (
 						<div
 							key={index}
