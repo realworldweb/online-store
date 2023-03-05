@@ -16,6 +16,7 @@ import ProductTile from '@/components/assets/productTile';
 /*types*/
 
 import { Item } from '@/lib/types';
+import Hero from '@/components/index/hero';
 
 interface myProps {
 	data: Item[];
@@ -56,6 +57,7 @@ const Home: NextPageWithLayout<myProps> = ({ data }) => {
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 			</Head>
 			<div className='d-flex flex-column px-4'>
+				<Hero />
 				<h1 className='d-flex position-relative mt-2 fw-bold pl-5'>
 					<em>Our products</em>
 				</h1>
