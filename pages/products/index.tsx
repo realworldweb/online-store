@@ -15,6 +15,7 @@ import ProductTile from '@/components/assets/productTile';
 import { SvgCaretBack, SvgCaretForward } from '@/components/assets/svgs';
 
 /*types*/
+import {Item} from '../../lib/types';
 interface myProps {
 	products: any[];
 	pageInfo: any;
@@ -30,7 +31,7 @@ export async function getServerSideProps() {
   */
 	try {
 		const data = await getProducts();
-		const products = data?.products.map((product: any) => {
+		const products = data?.products.map((product: Item) => {
 			product.name = removeProductNotes(product.name);
 	
 			return product;
@@ -80,7 +81,7 @@ const Home: NextPageWithLayout<myProps> = ({
            */
 			const newData = await getMoreProducts(currentInfo.endCursor)
 			
-			const newProducts = newData?.products.map((product: any) => {
+			const newProducts = newData?.products.map((product: Item) => {
 					product.name = removeProductNotes(product.name);
 		  
 					return product;
