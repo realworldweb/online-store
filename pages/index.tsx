@@ -17,6 +17,7 @@ import ProductTile from '@/components/assets/productTile';
 
 import { Item } from '@/lib/types';
 import Hero from '@/components/index/hero';
+import Link from 'next/link';
 
 interface myProps {
 	data: Item[];
@@ -30,19 +31,19 @@ export async function getServerSideProps() {
    }
   */
 	try {
-    let data = await getProducts();
-    	data = data?.products.map((product: Item) => {
-    		product.name = removeProductNotes(product.name);
-    
-    		return product;
-    	});
-    
-    	// Pass data to the page via props
-    	return { props: { data } };
-  } catch (err) {
-    console.error(err)
-    return { props: { data: [] } };
-  }
+		let data = await getProducts();
+		data = data?.products.map((product: Item) => {
+			product.name = removeProductNotes(product.name);
+
+			return product;
+		});
+
+		// Pass data to the page via props
+		return { props: { data } };
+	} catch (err) {
+		console.error(err);
+		return { props: { data: [] } };
+	}
 }
 
 const Home: NextPageWithLayout<myProps> = ({ data }) => {
@@ -65,6 +66,11 @@ const Home: NextPageWithLayout<myProps> = ({ data }) => {
 					{data.map((product, index) => {
 						return <ProductTile product={product} key={index} />;
 					})}
+					<Link className='d-flex w-100 text-decoration-none' href='/products'>
+						<button className='btn d-flex position-relative justify-content-center border border-dark btn-light w-35 my-3 mx-auto'>
+							<em>View all products</em>
+						</button>
+					</Link>
 				</section>
 			</div>
 		</>

@@ -1,4 +1,3 @@
-import { Item } from './types';
 
 const url = 'https://twstg2.eu.saleor.cloud/graphql/';
 
@@ -16,6 +15,8 @@ const getProducts = async (amount = 8) => {
                     edges {
                       node {
                         id
+                        rating
+                        name
                         thumbnail(size: 400) {
                           url
                           alt
@@ -30,23 +31,22 @@ const getProducts = async (amount = 8) => {
                             }
                           }
                         }
-                        name
                       }
                     }
+                    totalCount
                     pageInfo {
                       endCursor
                       hasNextPage
                       hasPreviousPage
                       startCursor
                     }
-                    totalCount
                     }
                 }`,
 			}),
 		});
 
 		const data = await response.json();
-
+    console.log(data);
 		let products = data.data.products.edges;
 
 		products = products.map((product: any) => {
@@ -79,6 +79,8 @@ const getMoreProducts = async (after: string, amount = 8) => {
                   edges {
                     node {
                       id
+                      name
+                      rating
                       thumbnail(size: 400) {
                         url
                         alt
@@ -93,23 +95,22 @@ const getMoreProducts = async (after: string, amount = 8) => {
                           }
                         }
                       }
-                      name
                     }
                   }
+                  totalCount
                   pageInfo {
                     endCursor
                     hasNextPage
                     hasPreviousPage
                     startCursor
                   }
-                  totalCount
                   }
               }`,
 			}),
 		});
 
 		const data = await response.json();
-
+    console.log(data);
 		let products = data.data.products.edges;
 
 		products = products.map((product: any) => {

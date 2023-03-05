@@ -120,20 +120,21 @@ const Home: NextPageWithLayout<myProps> = ({ product, relatedProducts }) => {
 						</div>
 					</div>
 					<div
-						className={`d-flex w-100 mx-3 my-3 py-2 align-items-center justify-content-center bg-dark ${Styles.productButton}`}
+						className={`d-flex w-100 mx-3 my-3 py-2 align-items-center justify-content-center ${Styles.productButton}`}
 					>
-						<p className='d-flex flex-column text-center text-white m-0 p-0'>
+						<p className='d-flex flex-column fw-bold text-center m-0 p-0'>
 							<em>Category:</em>&nbsp;{product.category.slug}
 						</p>
 						<div className='d-flex flex-column'>
-							<p className='text-white text-center m-0 p-0'>
+							<p className='fw-bold text-center m-0 p-0'>
 								<em>Rating:</em>
 							</p>
 							<div>{starRating(product.rating ?? 0).map((star) => star)}</div>
 						</div>
 					</div>
+					<hr className='d-block w-100 my-2 mx-auto bg-dark' />
 					<button
-						className={`btn w-75 d-block position-relative mx-auto text-dark ${ButtonStyles.gradientButtonSuccess}`}
+						className={`btn w-75 d-block mt-2 position-relative mx-auto text-dark ${ButtonStyles.gradientButtonSuccess}`}
 						onClick={() =>
 							dispatch.addCartItem({
 								id: product.id,

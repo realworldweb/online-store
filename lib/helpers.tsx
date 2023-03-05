@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { SvgStar, SvgHalfStar } from '@/components/assets/svgs';
+import { SvgStar } from '@/components/assets/svgs';
 
 const removeProductNotes = (str: string) => {
 	let end = false;
@@ -27,7 +27,7 @@ const starRating = (rating: number) => {
 			half = false;
 
 			return (
-				<SvgHalfStar width='1.6rem' height='1.6rem' fill='#ffcd3c' key={i} />
+				<SvgStar width='1.6rem' height='1.6rem' key={i} />
 			);
 		}
 

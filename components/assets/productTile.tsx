@@ -9,6 +9,9 @@ import Image from 'next/image';
 import { useCart } from '@/context/cart';
 import { CartContextType } from '@/context/cart';
 
+/*helpers*/
+import { starRating } from '@/lib/helpers';
+
 /*styles*/
 import Styles from '@/styles/modules/assets/productTile.module.css';
 import ButtonStyles from '@/styles/modules/assets/button.module.css';
@@ -52,9 +55,13 @@ const ProductTile: FC<MyProps> = ({ product }) => {
 						{product.name.trim()}
 					</Link>
 				</h4>
-				<span className='d-flex position-relative mx-auto fw-bold justify-content-center mb-3'>
+				<p className='d-flex m-0 p-0 position-relative mx-auto fw-bold justify-content-center mb-3'>
 					&pound;{parseFloat(String(product.price)).toFixed(2)}
-				</span>
+				</p>
+				<p className='d-flex m-0 p-0 position-relative mx-auto fw-bold align-items-center justify-content-center mb-3 gap-30'>
+					<span>Rating:</span>
+					<span>{starRating(product.rating ?? 0).map((star) => star)}</span>
+				</p>
 				<button
 					onClick={() =>
 						dispatch.addCartItem({
