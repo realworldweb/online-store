@@ -181,7 +181,7 @@ const Home: NextPageWithLayout<myProps> = ({
 			isMounted = false;
 		};
 	}, [switchCategories]);
-    console.log(currentProducts[0].length);
+
 	return (
 		<>
 			<Head>
