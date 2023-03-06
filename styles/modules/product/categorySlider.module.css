@@ -1,0 +1,25 @@
+.slider{
+overflow-x: scroll;
+
+&::-webkit-scrollbar {
+    height: 7px;
+  }
+  
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: #d3d3d3; 
+    border-radius: 10px;
+    margin-top: 5px;
+  }
+  
+  
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+}
+
+.category{
+ width: fit-content;
+ min-width: 200px;
+}

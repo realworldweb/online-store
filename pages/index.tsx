@@ -9,7 +9,7 @@ import type { NextPageWithLayout } from './_app';
 import Layout from '@/layouts/main';
 
 /*data*/
-import { getProducts } from '@/lib/products';
+import { getProducts } from '@/lib/data.tsx/products';
 import { removeProductNotes } from '@/lib/helpers';
 import ProductTile from '@/components/assets/productTile';
 

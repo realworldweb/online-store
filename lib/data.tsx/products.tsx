@@ -1,9 +1,9 @@
-
-const url = 'https://twstg2.eu.saleor.cloud/graphql/';
+/*constants*/
+import { apiUrl } from "../constants";
 
 const getProducts = async (amount = 8) => {
 	try {
-		const response = await fetch(url, {
+		const response = await fetch(apiUrl, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const getProducts = async (amount = 8) => {
 		});
 
 		const data = await response.json();
-    console.log(data);
+   
 		let products = data.data.products.edges;
 
 		products = products.map((product: any) => {
@@ -67,13 +67,13 @@ const getProducts = async (amount = 8) => {
 
 const getMoreProducts = async (after: string, amount = 8) => {
 	try {
-		const response = await fetch(url, {
+		const response = await fetch(apiUrl, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				query: `query GetProducts{
+				query: `query GetMoreProducts{
             products(channel: "uk", first: ${amount} after: "${after}") {
   
                   edges {
@@ -109,8 +109,9 @@ const getMoreProducts = async (after: string, amount = 8) => {
 			}),
 		});
 
+
 		const data = await response.json();
-    console.log(data);
+  
 		let products = data.data.products.edges;
 
 		products = products.map((product: any) => {
@@ -129,9 +130,77 @@ const getMoreProducts = async (after: string, amount = 8) => {
 	}
 };
 
+const getProductsWithFilter = async (filterBy: string,id: string, amount = 8) => {
+  try {
+		const response = await fetch(apiUrl, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				query: `query GetProductsWithFilter{
+            products(channel: "uk", first: ${amount}, filter: {
+              ${filterBy}: ["${id}"]
+            }) {
+              edges {
+                node {
+                  id
+                  name
+                  rating
+                  thumbnail(size: 400) {
+                    url
+                    alt
+                  }
+                  pricing {
+                    priceRangeUndiscounted {
+                      stop {
+                        gross {
+                          currency
+                          amount
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+              totalCount
+              pageInfo {
+                endCursor
+                hasNextPage
+                hasPreviousPage
+                startCursor
+              }
+            }
+          }`
+        }),
+      });
+
+      const data = await response.json();
+
+		let products = data.data.products.edges;
+    
+    products = products.map((product: any) => {
+			return {
+				...product.node,
+				price: product.node.pricing.priceRangeUndiscounted.stop.gross.amount,
+			};
+		});
+
+		const pageInfo = data.data.products.pageInfo;
+
+		return { products, pageInfo, totalCount: data.data.products.totalCount };
+    
+
+    } catch (err) {
+      console.error(err);
+      return null;
+    }
+
+}
+
 const getProduct = async (id: string) => {
 	try {
-		const response = await fetch(url, {
+		const response = await fetch(apiUrl, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -204,4 +273,4 @@ const getProduct = async (id: string) => {
 	}
 };
 
-export { getProducts, getMoreProducts, getProduct };
+export { getProducts, getMoreProducts, getProduct, getProductsWithFilter };

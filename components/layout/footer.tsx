@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Footer = () => {
 	return (
-		<footer className='d-flex flex-column align-items-center py-5 justify-content-center w-100 bg-black'>
+		<footer className='d-flex position-relative flex-column align-items-center py-5 justify-content-center w-100 bg-black'>
 			<h5 className="text-white">
 				<em>Pretium</em>
 			</h5>

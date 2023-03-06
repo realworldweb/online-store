@@ -66,10 +66,10 @@ export function SvgStar(props: SVGProps<SVGSVGElement>) {
 		>
 			<defs>
     <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0">
-      <stop offset="0%" stop-color="#ffcd3c" />
-	  <stop offset="51%" stop-color="#ffcd3c" />
-	  <stop offset="53%" stop-color="#fff" />
-      <stop offset="100%" stop-color="#fff" />
+      <stop offset="0%" stopColor="#ffcd3c" />
+	  <stop offset="51%" stopColor="#ffcd3c" />
+	  <stop offset="53%" stopColor="#fff" />
+      <stop offset="100%" stopColor="#fff" />
     </linearGradient>
   </defs>
 			

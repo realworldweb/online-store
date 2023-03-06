@@ -20,7 +20,7 @@ import Styles from '@/styles/modules/product/product.module.css';
 import ButtonStyles from '@/styles/modules/assets/button.module.css';
 
 /*product*/
-import { getProduct } from '@/lib/products';
+import { getProduct } from '@/lib/data.tsx/products';
 import { removeProductNotes, starRating } from '@/lib/helpers';
 
 /*types*/
