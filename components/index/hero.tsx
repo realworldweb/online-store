@@ -33,7 +33,7 @@ const Hero = () => {
 				<p
 					className={`d-flex position-absolute m-0 p-0 mb-3 fw-bold ${Styles.imageTagline}`}
 				>
-					<em className='px-3'>It's what were made of!</em>
+					<em className='px-3'>It&apos;s what were made of!</em>
 				</p>
 			</div>
 		</div>

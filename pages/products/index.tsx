@@ -127,7 +127,7 @@ const Home: NextPageWithLayout<myProps> = ({
 		return () => {
 			isMounted = false;
 		};
-	}, [loadMoreProducts]);
+	}, [loadMoreProducts, currentInfo, totalPages]);
 
 	/*manage change category*/
 
@@ -180,7 +180,7 @@ const Home: NextPageWithLayout<myProps> = ({
 		return () => {
 			isMounted = false;
 		};
-	}, [switchCategories]);
+	}, [switchCategories, currentCategory]);
 
 	return (
 		<>
@@ -202,7 +202,7 @@ const Home: NextPageWithLayout<myProps> = ({
 					{currentProducts[0].length === 0 ? (
 						<div className='d-flex flex-column text-dark w-100 align-items-center justify-content-center'>
 							<p className='m-0 p-0'>
-								<em className='fw-bold'>Sorry we couldn't find any items.</em>
+								<em className='fw-bold'>Sorry we couldn&apos;t find any items.</em>
 							</p>
 							<span>Why not try another category</span>
 						</div>
