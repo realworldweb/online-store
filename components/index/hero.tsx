@@ -2,8 +2,6 @@ import Image from 'next/image';
 
 import Styles from '../../styles/modules/index/hero.module.css';
 
-import SvgLoveLeaf from '../assets/svgs';
-
 const Hero = () => {
 	return (
 		<div
@@ -28,6 +26,9 @@ const Hero = () => {
 					src='/slider-image3.webp'
 					alt='made from Ethically sourced natural Indgredients And just a little bit of love'
 					fill
+					sizes="(max-width: 768px) 50vw,
+              90vw" 
+					priority
 				/>
 				<p
 					className={`d-flex position-absolute m-0 p-0 mb-3 fw-bold ${Styles.imageTagline}`}

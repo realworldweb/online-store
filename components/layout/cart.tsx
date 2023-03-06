@@ -44,9 +44,8 @@ const Cart = () => {
 			>
 				{state.contents.map((item: CartItem, index: number) => {
 					return (
-						<>
+						<div key={index}>
 							<div
-								key={index}
 								className={`d-flex flex-column flex-sm-row w-100 mx-auto mt-2 fw-bold text-dark ${Styles.cartItem}`}
 							>
 								<div className={`mx-auto ${Styles.cartItemImage}`}>
@@ -76,8 +75,8 @@ const Cart = () => {
 									</div>
 								</div>
 							</div>
-							<hr className='d-flex w-100 my-2 bg-black' key={index + 20} />
-						</>
+							<hr className='d-flex w-100 my-2 bg-black' key={index + 200} />
+						</div>
 
 					);
 				})}
